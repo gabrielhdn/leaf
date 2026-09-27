@@ -5,6 +5,8 @@
   },
   "Navigation": {
     "library": "Library",
+    "search": "Search books",
+    "addBook": "Add book",
     "access": "Access",
     "language": "Language",
     "theme": "Theme",
@@ -21,6 +23,65 @@
     "shelfTitle": "A place for your next reads",
     "shelfDescription": "Your books will appear here, always within reach of a new discovery.",
     "illustrationAlt": "Illustration of a leaf rising from the pages of a book"
+  },
+  "Books": {
+    "add": "Add book",
+    "databaseUnavailable": "The library will be available once the database connection is configured.",
+    "noResults": "No books match your search. Try different terms or filters.",
+    "summary": {
+      "total": "Books",
+      "reading": "Currently reading",
+      "wishlist": "Wishlist",
+      "assimilated": "Assimilated"
+    },
+    "filters": {
+      "search": "Search by title or author",
+      "ownership": "Ownership",
+      "reading": "Reading",
+      "allOwnership": "All books",
+      "allReading": "All statuses",
+      "apply": "Filter",
+      "clear": "Clear filters"
+    },
+    "form": {
+      "eyebrow": "Your library",
+      "newTitle": "Add a book",
+      "editTitle": "Edit book",
+      "title": "Title",
+      "authors": "Authors",
+      "authorsHelp": "Enter one author per line.",
+      "description": "Description",
+      "coverUrl": "Cover URL",
+      "isbn": "ISBN",
+      "publicationYear": "Publication year",
+      "pageCount": "Page count",
+      "rating": "Rating",
+      "noRating": "No rating",
+      "ownership": "Ownership",
+      "owned": "In the library",
+      "wishlist": "Wishlist",
+      "reading": "Reading status",
+      "wantToRead": "Want to read",
+      "readingNow": "Reading",
+      "read": "Read",
+      "abandoned": "Abandoned",
+      "save": "Save book",
+      "saving": "Saving...",
+      "invalid": "Check the fields and try again.",
+      "duplicateIsbn": "A book with this ISBN already exists.",
+      "notFound": "This book was not found."
+    },
+    "detail": {
+      "eyebrow": "On the shelf",
+      "back": "Back to library",
+      "description": "About this book",
+      "startedAt": "Reading started",
+      "finishedAt": "Reading finished",
+      "edit": "Edit",
+      "updateStatus": "Update statuses",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this book and all its reading records?"
+    }
   },
   "Access": {
     "eyebrow": "Owner space",

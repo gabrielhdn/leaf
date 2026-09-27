@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { bookInputSchema } from "./book-input";
+import { bookInputSchema, parseBookForm } from "./book-input";
 
 const validBook = {
   title: "  A hora da estrela  ",
@@ -37,5 +37,40 @@ describe("book input", () => {
     expect(bookInputSchema.safeParse({ ...validBook, pageCount: 0 }).success).toBe(
       false,
     );
+  });
+
+  it("parses optional form fields without changing entered content", () => {
+    const form = new FormData();
+    form.set("title", "  A hora da estrela  ");
+    form.set("authors", "Clarice Lispector\n\n  Outro autor  \r\n");
+    form.set("description", "  My note  ");
+    form.set("ownershipStatus", "OWNED");
+    form.set("readingStatus", "READING");
+    form.set("pageCount", "100");
+
+    const parsed = parseBookForm(form);
+    expect(parsed.success).toBe(true);
+    if (parsed.success) {
+      expect(parsed.data.authors).toEqual(["Clarice Lispector", "  Outro autor  "]);
+      expect(parsed.data.description).toBe("  My note  ");
+      expect(parsed.data.pageCount).toBe(100);
+      expect(parsed.data.rating).toBeNull();
+    }
+  });
+
+  it("rejects malformed numeric form fields", () => {
+    const form = new FormData();
+    form.set("title", "Book");
+    form.set("authors", "Author");
+    form.set("ownershipStatus", "OWNED");
+    form.set("readingStatus", "WANT_TO_READ");
+    form.set("pageCount", "not-a-number");
+
+    expect(parseBookForm(form).success).toBe(false);
+  });
+
+  it("accepts web cover URLs only", () => {
+    expect(bookInputSchema.safeParse({ ...validBook, coverUrl: "https://example.com/cover.jpg" }).success).toBe(true);
+    expect(bookInputSchema.safeParse({ ...validBook, coverUrl: "javascript:alert(1)" }).success).toBe(false);
   });
 });

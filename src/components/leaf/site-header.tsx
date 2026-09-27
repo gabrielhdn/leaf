@@ -1,11 +1,15 @@
+import { Plus, Search } from "lucide-react";
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getPathname, Link } from "@/i18n/navigation";
+import { isOwner } from "@/lib/auth/owner-session";
 import { LocaleSwitcher } from "./locale-switcher";
 import { ThemeSwitcher } from "./theme-switcher";
 
 export async function SiteHeader() {
   const t = await getTranslations("Navigation");
+  const locale = await getLocale();
+  const owner = await isOwner();
 
   return (
     <header className="border-b border-border/70">
@@ -34,7 +38,12 @@ export async function SiteHeader() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-3 sm:gap-5">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-5">
+          <form action={getPathname({ href: "/", locale })} method="get" role="search" className="hidden items-center rounded-lg border border-input bg-card sm:flex">
+            <label htmlFor="global-search" className="sr-only">{t("search")}</label>
+            <input id="global-search" name="q" type="search" maxLength={100} placeholder={t("search")} className="h-9 w-36 bg-transparent px-3 text-sm outline-none lg:w-48" />
+            <button type="submit" aria-label={t("search")} className="flex size-9 items-center justify-center text-muted-foreground hover:text-foreground"><Search className="size-4" aria-hidden="true" /></button>
+          </form>
           <nav aria-label={t("library")} className="flex items-center gap-6">
             <Link
               href="/"
@@ -42,6 +51,7 @@ export async function SiteHeader() {
             >
               {t("library")}
             </Link>
+            {owner && process.env.DATABASE_URL && <Link href="/books/new" className="inline-flex items-center gap-1 text-sm font-medium text-brand hover:underline"><Plus className="size-4" aria-hidden="true" />{t("addBook")}</Link>}
             <Link
               href="/login"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"

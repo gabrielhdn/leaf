@@ -57,7 +57,7 @@ npm run test
 
 ## Banco de dados e acesso privado
 
-O esquema Prisma e a migração inicial estão em `prisma/`. Até que um projeto Neon seja configurado, a página pública funciona sem banco; o cadastro e a leitura de dados reais ainda não foram implementados.
+O esquema Prisma e a migração inicial estão em `prisma/`. Até que um projeto Neon seja configurado, a página pública mostra um estado vazio e informa que a biblioteca ainda não está disponível.
 
 Copie `.env.example` para `.env` e configure:
 
@@ -73,4 +73,4 @@ Depois de criar o banco Neon, aplique a migração com `npm run db:deploy`. A ap
 
 ## Estado do projeto
 
-A base visual, o esquema de dados e o acesso privado estão preparados. O cadastro de livros, a conexão ao banco Neon e a implantação serão concluídos nos próximos blocos.
+A base visual, o esquema de dados e o acesso privado estão preparados. O proprietário pode cadastrar, editar e excluir livros com múltiplos autores, capa por URL, dados bibliográficos e estados independentes de posse e leitura. A biblioteca pública permite buscar por título ou autor e filtrar por posse e leitura. A conexão a um projeto Neon, citações, notas, reflexão e implantação ainda dependem dos próximos blocos.

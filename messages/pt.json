@@ -5,6 +5,8 @@
   },
   "Navigation": {
     "library": "Biblioteca",
+    "search": "Buscar livros",
+    "addBook": "Adicionar",
     "access": "Acesso",
     "language": "Idioma",
     "theme": "Tema",
@@ -21,6 +23,65 @@
     "shelfTitle": "Um lugar para suas próximas leituras",
     "shelfDescription": "Seus livros aparecerão aqui, sempre ao alcance de uma nova descoberta.",
     "illustrationAlt": "Ilustração de uma folha nascendo das páginas de um livro"
+  },
+  "Books": {
+    "add": "Adicionar livro",
+    "databaseUnavailable": "A biblioteca estará disponível quando a conexão com o banco de dados for configurada.",
+    "noResults": "Nenhum livro corresponde à sua busca. Experimente outros termos ou filtros.",
+    "summary": {
+      "total": "Livros",
+      "reading": "Lendo agora",
+      "wishlist": "Lista de desejos",
+      "assimilated": "Assimilados"
+    },
+    "filters": {
+      "search": "Buscar por título ou autor",
+      "ownership": "Posse",
+      "reading": "Leitura",
+      "allOwnership": "Todos os livros",
+      "allReading": "Todos os estados",
+      "apply": "Filtrar",
+      "clear": "Limpar filtros"
+    },
+    "form": {
+      "eyebrow": "Sua biblioteca",
+      "newTitle": "Adicionar livro",
+      "editTitle": "Editar livro",
+      "title": "Título",
+      "authors": "Autores",
+      "authorsHelp": "Escreva um autor por linha.",
+      "description": "Descrição",
+      "coverUrl": "URL da capa",
+      "isbn": "ISBN",
+      "publicationYear": "Ano de publicação",
+      "pageCount": "Número de páginas",
+      "rating": "Avaliação",
+      "noRating": "Sem avaliação",
+      "ownership": "Posse",
+      "owned": "Na biblioteca",
+      "wishlist": "Lista de desejos",
+      "reading": "Estado de leitura",
+      "wantToRead": "Quero ler",
+      "readingNow": "Lendo",
+      "read": "Lido",
+      "abandoned": "Abandonado",
+      "save": "Salvar livro",
+      "saving": "Salvando...",
+      "invalid": "Confira os campos e tente novamente.",
+      "duplicateIsbn": "Já existe um livro com esse ISBN.",
+      "notFound": "Este livro não foi encontrado."
+    },
+    "detail": {
+      "eyebrow": "Na estante",
+      "back": "Voltar à biblioteca",
+      "description": "Sobre o livro",
+      "startedAt": "Início da leitura",
+      "finishedAt": "Fim da leitura",
+      "edit": "Editar",
+      "updateStatus": "Atualizar estados",
+      "delete": "Excluir",
+      "deleteConfirm": "Excluir este livro e todos os registros de leitura associados?"
+    }
   },
   "Access": {
     "eyebrow": "Espaço do proprietário",
