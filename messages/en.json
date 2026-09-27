@@ -152,10 +152,10 @@
       "assimilatedAt": "Assimilated"
     },
     "stages": {
-      "NIGREDO": { "name": "Nigredo", "subtitle": "Possibility", "description": "The book is still waiting to be encountered." },
-      "ALBEDO": { "name": "Albedo", "subtitle": "Reading in progress", "description": "Passages and impressions begin to take shape." },
-      "CITRINITAS": { "name": "Citrinitas", "subtitle": "Post-reading reflection", "description": "The reading is finished; what remained can be gathered." },
-      "RUBEDO": { "name": "Rubedo", "subtitle": "Assimilated work", "description": "What was read becomes part of your repertoire." }
+      "NIGREDO": { "name": "Nigredo", "subtitle": "Possibility", "description": "The book is still waiting to be encountered.", "alchemy": "matter breaks down so transformation can begin" },
+      "ALBEDO": { "name": "Albedo", "subtitle": "Reading in progress", "description": "Passages and impressions begin to take shape.", "alchemy": "matter is purified and begins to gain clarity" },
+      "CITRINITAS": { "name": "Citrinitas", "subtitle": "Post-reading reflection", "description": "The reading is finished; what remained can be gathered.", "alchemy": "light reveals an understanding taking shape" },
+      "RUBEDO": { "name": "Rubedo", "subtitle": "Assimilated work", "description": "What was read becomes part of your repertoire.", "alchemy": "the transformed parts come together and the work is completed" }
     },
     "current": {
       "NIGREDO": "This book is waiting to be read.",

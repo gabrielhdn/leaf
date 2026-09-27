@@ -152,10 +152,10 @@
       "assimilatedAt": "Assimilação"
     },
     "stages": {
-      "NIGREDO": { "name": "Nigredo", "subtitle": "Possibilidade", "description": "O livro ainda espera seu encontro com você." },
-      "ALBEDO": { "name": "Albedo", "subtitle": "Leitura em curso", "description": "Trechos e impressões começam a ganhar forma." },
-      "CITRINITAS": { "name": "Citrinitas", "subtitle": "Reflexão após a leitura", "description": "A leitura terminou; o que permaneceu pode ser reunido." },
-      "RUBEDO": { "name": "Rubedo", "subtitle": "Obra assimilada", "description": "O que foi lido passa a fazer parte do seu repertório." }
+      "NIGREDO": { "name": "Nigredo", "subtitle": "Possibilidade", "description": "O livro ainda espera seu encontro com você.", "alchemy": "a matéria se desfaz para que a transformação possa começar" },
+      "ALBEDO": { "name": "Albedo", "subtitle": "Leitura em curso", "description": "Trechos e impressões começam a ganhar forma.", "alchemy": "a matéria é purificada e começa a ganhar clareza" },
+      "CITRINITAS": { "name": "Citrinitas", "subtitle": "Reflexão após a leitura", "description": "A leitura terminou; o que permaneceu pode ser reunido.", "alchemy": "a luz revela uma compreensão que estava se formando" },
+      "RUBEDO": { "name": "Rubedo", "subtitle": "Obra assimilada", "description": "O que foi lido passa a fazer parte do seu repertório.", "alchemy": "as partes transformadas se unem e a obra se completa" }
     },
     "current": {
       "NIGREDO": "Este livro está à espera de ser lido.",
