@@ -37,12 +37,17 @@ Leaf busca uma experiência minimalista, acolhedora e contemporânea, com os liv
 
 ## Desenvolvimento local
 
-Requer Node.js 22.12 ou superior. Para executar a interface:
+Requer Node.js 22.12 ou superior e Docker Compose. O PostgreSQL local roda no Docker; a aplicação roda no computador:
 
 ```bash
 npm install
+docker compose up -d
+cp .env.example .env
+npm run db:deploy
 npm run dev
 ```
+
+O banco local usa a porta `5433` somente em `127.0.0.1` e guarda os dados em um volume Docker. As URLs de `DATABASE_URL` e `DIRECT_URL` no `.env.example` apontam exclusivamente para esse banco. Preencha `AUTH_SECRET` (`openssl rand -base64 32`) e `LEAF_OWNER_PASSWORD` (senha com pelo menos 16 caracteres) no `.env` para habilitar o acesso do proprietário. Para parar o banco, use `docker compose down`; os dados permanecem no volume.
 
 Abra `http://localhost:3000` para a versão em português ou `http://localhost:3000/en` para a versão em inglês. A interface acompanha a preferência de tema do sistema e permite selecionar tema claro ou escuro.
 
@@ -57,22 +62,14 @@ npm run test
 
 ## Banco de dados e acesso privado
 
-O esquema Prisma e a migração inicial estão em `prisma/`. Até que um projeto Neon seja configurado, a página pública mostra um estado vazio e informa que a biblioteca ainda não está disponível.
+O esquema Prisma e a migração inicial estão em `prisma/`. O `.env` local é ignorado pelo Git e deve conter somente a conexão com o PostgreSQL do Compose. Sem os segredos de acesso, a página pública permanece disponível e o login fica desativado.
 
-Copie `.env.example` para `.env` e configure:
+Em Production na Vercel, configure as mesmas **chaves** de ambiente com valores próprios de produção: `DATABASE_URL` com a conexão pooled do Neon, `DIRECT_URL` com a conexão direta do Neon, `AUTH_SECRET`, `AUTH_TRUST_HOST=true` e `LEAF_OWNER_PASSWORD`. Não copie URLs do Neon para o `.env` de desenvolvimento. Execute `npm run db:deploy` para produção separadamente, em um ambiente que tenha `DIRECT_URL` do Neon; o comando mostrado em desenvolvimento aplica a migração apenas ao PostgreSQL local.
 
-- `DATABASE_URL`: conexão com pool do Neon para a aplicação;
-- `DIRECT_URL`: conexão direta do Neon para migrações;
-- `AUTH_SECRET`: segredo aleatório para as sessões do Auth.js (`openssl rand -base64 32`);
-- `AUTH_TRUST_HOST=true`: permite ao Auth.js usar o host da aplicação;
-- `LEAF_OWNER_PASSWORD`: senha única e forte, com pelo menos 16 caracteres, para liberar a escrita.
-
-Os valores são segredos: mantenha o arquivo `.env` fora do Git e configure as mesmas variáveis na Vercel quando fizer a implantação. Sem os segredos de acesso, a página pública permanece disponível e o login fica desativado.
-
-Depois de criar o banco Neon, aplique a migração com `npm run db:deploy`. A aplicação usa a conexão com pool para consultas e a conexão direta para as migrações. Os arquivos de código do Prisma Client são gerados automaticamente após `npm install`.
+Os arquivos de código do Prisma Client são gerados automaticamente após `npm install`.
 
 ## Estado do projeto
 
 A aplicação inclui cadastro de livros, citações e notas, biblioteca pesquisável, lista de desejos, leituras agrupadas e visão geral da Great Work. Ao terminar um livro, o proprietário pode registrar avaliação, reflexão e ideias principais, ou assimilá-lo sem escrever nada. A etapa é derivada do estado da leitura: concluir leva a Citrinitas e assimilar leva a Rubedo. A leitura é pública; todas as alterações exigem acesso do proprietário.
 
-Faltam conectar um projeto Neon, testar os fluxos com dados persistidos e configurar a publicação na Vercel.
+Faltam aplicar a migração no Neon, testar os fluxos com dados persistidos e configurar a publicação na Vercel.
