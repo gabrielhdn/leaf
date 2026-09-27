@@ -4,17 +4,19 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { getPathname, Link } from "@/i18n/navigation";
 import { isOwner } from "@/lib/auth/owner-session";
 import { LocaleSwitcher } from "./locale-switcher";
+import { MobileMenu } from "./mobile-menu";
 import { ThemeSwitcher } from "./theme-switcher";
 
 export async function SiteHeader() {
   const t = await getTranslations("Navigation");
   const locale = await getLocale();
   const owner = await isOwner();
+  const canAddBook = owner && Boolean(process.env.DATABASE_URL);
 
   return (
-    <header className="border-b border-border/70">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-4 sm:px-8 lg:px-12">
-        <Link href="/" className="group flex items-center gap-2.5" aria-label="Leaf">
+    <header className="relative z-30 border-b border-border/70">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 sm:px-8 lg:px-12">
+        <Link href="/" className="group flex shrink-0 items-center gap-2.5" aria-label="Leaf">
           <span className="relative block size-11 shrink-0">
             <Image
               src="/brand/logo-light.png"
@@ -38,25 +40,26 @@ export async function SiteHeader() {
           </span>
         </Link>
 
-        <div className="flex flex-wrap items-center gap-3 sm:gap-5">
-          <form action={getPathname({ href: "/", locale })} method="get" role="search" className="hidden items-center rounded-lg border border-input bg-card sm:flex">
+        <div className="hidden items-center gap-5 lg:flex">
+          <form action={getPathname({ href: "/", locale })} method="get" role="search" className="header-search flex items-center overflow-hidden rounded-lg border border-input">
             <label htmlFor="global-search" className="sr-only">{t("search")}</label>
             <input id="global-search" name="q" type="search" maxLength={100} placeholder={t("search")} className="h-9 w-36 bg-transparent px-3 text-sm outline-none lg:w-48" />
             <button type="submit" aria-label={t("search")} className="flex size-9 items-center justify-center text-muted-foreground hover:text-foreground"><Search className="size-4" aria-hidden="true" /></button>
           </form>
-          {owner && process.env.DATABASE_URL && <Link href="/books/new" className="inline-flex items-center gap-1 text-sm font-medium text-brand hover:underline"><Plus className="size-4" aria-hidden="true" />{t("addBook")}</Link>}
+          {canAddBook && <Link href="/books/new" className="inline-flex items-center gap-1 text-sm font-medium text-brand hover:underline"><Plus className="size-4" aria-hidden="true" />{t("addBook")}</Link>}
           <Link href="/login" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">{t("access")}</Link>
           <LocaleSwitcher />
           <ThemeSwitcher />
         </div>
-        <nav aria-label={t("navigation")} className="flex w-full items-center gap-6 overflow-x-auto border-t border-border/70 pt-3 text-sm font-medium whitespace-nowrap">
-          <Link href="/" className="text-muted-foreground transition-colors hover:text-foreground">{t("library")}</Link>
-          <Link href="/reading" className="text-muted-foreground transition-colors hover:text-foreground">{t("reading")}</Link>
-          <Link href="/wishlist" className="text-muted-foreground transition-colors hover:text-foreground">{t("wishlist")}</Link>
-          <Link href="/quotes" className="text-muted-foreground transition-colors hover:text-foreground">{t("quotes")}</Link>
-          <Link href="/great-work" className="text-muted-foreground transition-colors hover:text-foreground">{t("greatWork")}</Link>
-        </nav>
+        <MobileMenu canAddBook={canAddBook} />
       </div>
+      <nav aria-label={t("navigation")} className="mx-auto hidden max-w-7xl items-center gap-6 border-t border-border/70 px-5 py-3 text-sm font-medium whitespace-nowrap sm:px-8 lg:flex lg:px-12">
+        <Link href="/" className="text-muted-foreground transition-colors hover:text-foreground">{t("library")}</Link>
+        <Link href="/reading" className="text-muted-foreground transition-colors hover:text-foreground">{t("reading")}</Link>
+        <Link href="/wishlist" className="text-muted-foreground transition-colors hover:text-foreground">{t("wishlist")}</Link>
+        <Link href="/quotes" className="text-muted-foreground transition-colors hover:text-foreground">{t("quotes")}</Link>
+        <Link href="/great-work" className="text-muted-foreground transition-colors hover:text-foreground">{t("greatWork")}</Link>
+      </nav>
     </header>
   );
 }

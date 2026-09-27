@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 
-export function LocaleSwitcher() {
+export function LocaleSwitcher({ onNavigate }: { onNavigate?: () => void } = {}) {
   const locale = useLocale();
   const pathname = usePathname();
   const t = useTranslations("Navigation");
@@ -20,6 +20,7 @@ export function LocaleSwitcher() {
           locale={option}
           hrefLang={option}
           aria-current={locale === option ? "page" : undefined}
+          onClick={onNavigate}
           className="rounded-lg px-2.5 py-2 text-muted-foreground transition-colors hover:text-foreground aria-[current=page]:bg-muted aria-[current=page]:text-foreground"
         >
           {option.toUpperCase()}

@@ -25,6 +25,7 @@
   --color-destructive: var(--destructive);
   --color-border: var(--border);
   --color-input: var(--input);
+  --color-field: var(--field);
   --color-ring: var(--ring);
   --color-brand: var(--brand);
   --color-warm-accent: var(--warm-accent);
@@ -58,6 +59,8 @@
   --destructive: #9f453d;
   --border: #dcd5c8;
   --input: #dcd5c8;
+  --field: var(--background);
+  --field-focus: var(--muted);
   --ring: #68735f;
   --brand: #344438;
   --warm-accent: #c7af82;
@@ -66,23 +69,25 @@
 
 .dark {
   color-scheme: dark;
-  --background: #102019;
-  --foreground: #eee9df;
-  --card: #172820;
-  --card-foreground: #eee9df;
-  --popover: #172820;
-  --popover-foreground: #eee9df;
+  --background: #0c1410;
+  --foreground: #eeeae1;
+  --card: #171f19;
+  --card-foreground: #eeeae1;
+  --popover: #171f19;
+  --popover-foreground: #eeeae1;
   --primary: #d6c6a5;
-  --primary-foreground: #102019;
-  --secondary: #203229;
-  --secondary-foreground: #eee9df;
-  --muted: #203229;
-  --muted-foreground: #bac4b7;
+  --primary-foreground: #0c1410;
+  --secondary: #222b23;
+  --secondary-foreground: #eeeae1;
+  --muted: #2a342a;
+  --muted-foreground: #b6c0b3;
   --accent: #bca477;
-  --accent-foreground: #102019;
+  --accent-foreground: #0c1410;
   --destructive: #e49387;
-  --border: #344438;
-  --input: #344438;
+  --border: #344038;
+  --input: #405047;
+  --field: #1d2820;
+  --field-focus: #2b392e;
   --ring: #d6c6a5;
   --brand: #d6c6a5;
   --warm-accent: #bca477;
@@ -105,4 +110,65 @@
     background: var(--accent);
     color: var(--accent-foreground);
   }
+}
+
+:where(input:not([type="hidden"]), textarea, select) {
+  background-color: var(--field);
+  color: var(--foreground);
+  transition: background-color 200ms ease;
+}
+
+:where(input:not([type="hidden"]), textarea, select):focus {
+  background-color: var(--field-focus);
+  outline: none;
+  box-shadow: none;
+}
+
+.header-search {
+  background-color: var(--field);
+  transition: background-color 200ms ease;
+}
+
+.header-search:focus-within {
+  background-color: var(--field-focus);
+}
+
+.header-search input,
+.header-search input:focus {
+  background-color: transparent;
+}
+
+.mobile-menu-panel {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-0.5rem);
+  pointer-events: none;
+  transition: opacity 220ms ease, transform 220ms ease, visibility 220ms;
+}
+
+.mobile-menu-panel[data-open="true"] {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu-panel {
+    transition: none;
+  }
+}
+
+select option {
+  background-color: var(--field);
+  color: var(--foreground);
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+:where(a[href], button:not(:disabled), select:not(:disabled), summary, label[for], input:is([type="button"], [type="submit"], [type="reset"], [type="checkbox"], [type="radio"], [type="file"]):not(:disabled)) {
+  cursor: pointer;
 }

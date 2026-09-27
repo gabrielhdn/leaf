@@ -45,13 +45,13 @@ export function ReadingEntryForm({
           maxLength={20_000}
           defaultValue={content}
           aria-invalid={state.error === "invalid"}
-          className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm leading-7 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+          className="w-full rounded-lg border border-input bg-field px-3 py-2 text-sm leading-7 outline-none"
         />
       </div>
       <div className="flex flex-wrap items-end gap-3">
         <div className="w-28 space-y-2">
           <label htmlFor={pageId} className="text-sm font-medium">{t("pageLabel")}</label>
-          <Input id={pageId} name="page" type="number" min={1} max={2_147_483_647} defaultValue={page ?? ""} className="h-9 bg-background" />
+          <Input id={pageId} name="page" type="number" min={1} max={2_147_483_647} defaultValue={page ?? ""} className="h-9" />
         </div>
         <Button type="submit" disabled={pending} size="lg">{pending ? t("saving") : t("save")}</Button>
       </div>

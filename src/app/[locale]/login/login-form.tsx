@@ -29,7 +29,7 @@ export function LoginForm({ locale }: { locale: string }) {
           maxLength={1024}
           aria-invalid={state.error === "invalid"}
           aria-describedby={state.error ? "login-error" : undefined}
-          className="h-11 bg-background px-3"
+          className="h-11 px-3"
         />
       </div>
 

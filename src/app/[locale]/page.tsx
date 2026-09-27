@@ -1,7 +1,7 @@
 import { BookOpenText, Plus } from "lucide-react";
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { BookCard } from "@/components/leaf/book-card";
+import { Select } from "@/components/ui/select";
 import { greatWorkStages } from "@/domain/reading-journey";
 import { Link } from "@/i18n/navigation";
 import { isOwner } from "@/lib/auth/owner-session";
@@ -43,13 +43,13 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
 
   return (
     <main className="mx-auto w-full max-w-7xl px-5 pb-20 pt-12 sm:px-8 sm:pt-16 lg:px-12 lg:pt-20">
-      <section className={`grid items-center gap-9 lg:gap-14 ${allBooks.length ? "" : "lg:grid-cols-[minmax(0,1.07fr)_minmax(0,0.93fr)]"}`}>
-        <div className="max-w-2xl">
+      <section className="max-w-4xl">
+        <div>
           <p className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
             <span className="h-px w-9 bg-warm-accent" aria-hidden="true" />
             {t("eyebrow")}
           </p>
-          <h1 className={`font-heading font-medium tracking-[-0.055em] text-brand ${allBooks.length ? "text-5xl leading-none sm:text-6xl" : "max-w-[12ch] text-[clamp(4.1rem,8vw,7.5rem)] leading-[0.83]"}`}>
+          <h1 className={`font-heading font-medium tracking-[-0.055em] text-brand ${allBooks.length ? "text-5xl leading-none sm:text-6xl" : "max-w-[15ch] text-[clamp(3.5rem,7vw,6.5rem)] leading-[0.95]"}`}>
             {t("title")}
           </h1>
           <p className="mt-8 max-w-[38rem] text-base leading-8 text-muted-foreground sm:text-lg">
@@ -60,13 +60,9 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
           </p>
         </div>
 
-        {!allBooks.length && <div className="relative mx-auto flex w-full max-w-[34rem] items-center justify-center overflow-hidden rounded-[2rem] border border-border/70 bg-card px-8 py-5 shadow-[0_18px_50px_-36px_var(--foreground)] sm:px-12 lg:py-8">
-          <div aria-hidden="true" className="absolute inset-8 rounded-full border border-warm-accent/30" />
-          <Image src="/brand/illustration.png" alt={t("illustrationAlt")} width={1254} height={1254} priority className="relative z-10 h-auto w-full max-w-[25rem] object-contain drop-shadow-lg" />
-        </div>}
       </section>
 
-      <section aria-labelledby="shelf-title" className={allBooks.length ? "mt-12" : "mt-20 sm:mt-24"}>
+      <section aria-labelledby="shelf-title" className={allBooks.length ? "mt-12" : "mt-14 sm:mt-16"}>
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>
             <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
@@ -89,26 +85,26 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
 
         {databaseReady && <form method="get" className="mt-8 grid gap-3 rounded-xl border border-border bg-card p-4 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_repeat(4,auto)]">
           <label className="sr-only" htmlFor="book-search">{booksT("filters.search")}</label>
-          <input id="book-search" name="q" type="search" maxLength={100} defaultValue={search} placeholder={booksT("filters.search")} className="h-10 min-w-0 rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 sm:col-span-2 lg:col-span-1" />
+          <input id="book-search" name="q" type="search" maxLength={100} defaultValue={search} placeholder={booksT("filters.search")} className="h-10 min-w-0 rounded-lg border border-input bg-field px-3 text-sm outline-none sm:col-span-2 lg:col-span-1" />
           <label className="sr-only" htmlFor="ownership-filter">{booksT("filters.ownership")}</label>
-          <select id="ownership-filter" name="ownership" defaultValue={filter.ownership ?? ""} className="h-10 rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50">
+          <Select id="ownership-filter" name="ownership" defaultValue={filter.ownership ?? ""} containerClassName="min-w-44">
             <option value="">{booksT("filters.allOwnership")}</option>
             <option value="OWNED">{booksT("form.owned")}</option>
             <option value="WISHLIST">{booksT("form.wishlist")}</option>
-          </select>
+          </Select>
           <label className="sr-only" htmlFor="reading-filter">{booksT("filters.reading")}</label>
-          <select id="reading-filter" name="reading" defaultValue={filter.reading ?? ""} className="h-10 rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50">
+          <Select id="reading-filter" name="reading" defaultValue={filter.reading ?? ""} containerClassName="min-w-44">
             <option value="">{booksT("filters.allReading")}</option>
             <option value="WANT_TO_READ">{booksT("form.wantToRead")}</option>
             <option value="READING">{booksT("form.readingNow")}</option>
             <option value="READ">{booksT("form.read")}</option>
             <option value="ABANDONED">{booksT("form.abandoned")}</option>
-          </select>
+          </Select>
           <label className="sr-only" htmlFor="stage-filter">{booksT("filters.stage")}</label>
-          <select id="stage-filter" name="stage" defaultValue={filter.stage ?? ""} className="h-10 rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50">
+          <Select id="stage-filter" name="stage" defaultValue={filter.stage ?? ""} containerClassName="min-w-44">
             <option value="">{booksT("filters.allStages")}</option>
             {greatWorkStages.map((stage) => <option key={stage} value={stage}>{greatT(`stages.${stage}.name`)}</option>)}
-          </select>
+          </Select>
           <button type="submit" className="h-10 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/80">{booksT("filters.apply")}</button>
         </form>}
 

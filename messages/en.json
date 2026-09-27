@@ -13,6 +13,8 @@
     "search": "Search books",
     "addBook": "Add book",
     "access": "Access",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
     "language": "Language",
     "theme": "Theme",
     "light": "Light",
@@ -26,8 +28,7 @@
     "motto": "Solve et Coagula",
     "shelfLabel": "Your shelf",
     "shelfTitle": "A place for your next reads",
-    "shelfDescription": "Your books will appear here, always within reach of a new discovery.",
-    "illustrationAlt": "Illustration of a leaf rising from the pages of a book"
+    "shelfDescription": "Your books will appear here, always within reach of a new discovery."
   },
   "Books": {
     "add": "Add book",

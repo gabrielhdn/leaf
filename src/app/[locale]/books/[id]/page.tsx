@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { BookCover } from "@/components/leaf/book-cover";
+import { Select } from "@/components/ui/select";
 import { Link } from "@/i18n/navigation";
 import { isOwner } from "@/lib/auth/owner-session";
 import { getBook } from "@/lib/books";
@@ -48,8 +49,8 @@ export default async function BookPage({ params }: { params: Promise<{ locale: s
           {book.description && <section className="mt-10 border-t border-border pt-7"><h2 className="font-heading text-3xl text-brand">{t("detail.description")}</h2><p className="mt-3 whitespace-pre-wrap leading-8 text-muted-foreground">{book.description}</p></section>}
           {owner && <form action={updateBookStatus} className="mt-10 grid gap-3 rounded-xl border border-border bg-card p-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
             <input type="hidden" name="id" value={id} /><input type="hidden" name="locale" value={locale} />
-            <div className="space-y-2"><label htmlFor="detail-ownership" className="text-sm font-medium">{t("form.ownership")}</label><select id="detail-ownership" name="ownershipStatus" defaultValue={book.ownershipStatus} className="h-9 w-full rounded-lg border border-input bg-background px-2.5 text-sm"><option value="OWNED">{t("form.owned")}</option><option value="WISHLIST">{t("form.wishlist")}</option></select></div>
-            <div className="space-y-2"><label htmlFor="detail-reading" className="text-sm font-medium">{t("form.reading")}</label><select id="detail-reading" name="readingStatus" defaultValue={book.readingStatus} className="h-9 w-full rounded-lg border border-input bg-background px-2.5 text-sm"><option value="WANT_TO_READ">{t("form.wantToRead")}</option><option value="READING">{t("form.readingNow")}</option><option value="READ">{t("form.read")}</option><option value="ABANDONED">{t("form.abandoned")}</option></select></div>
+            <div className="space-y-2"><label htmlFor="detail-ownership" className="text-sm font-medium">{t("form.ownership")}</label><Select id="detail-ownership" name="ownershipStatus" defaultValue={book.ownershipStatus} fieldSize="sm"><option value="OWNED">{t("form.owned")}</option><option value="WISHLIST">{t("form.wishlist")}</option></Select></div>
+            <div className="space-y-2"><label htmlFor="detail-reading" className="text-sm font-medium">{t("form.reading")}</label><Select id="detail-reading" name="readingStatus" defaultValue={book.readingStatus} fieldSize="sm"><option value="WANT_TO_READ">{t("form.wantToRead")}</option><option value="READING">{t("form.readingNow")}</option><option value="READ">{t("form.read")}</option><option value="ABANDONED">{t("form.abandoned")}</option></Select></div>
             <button type="submit" className="h-9 rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground hover:bg-primary/80">{t("detail.updateStatus")}</button>
           </form>}
           {owner && <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-border pt-7">

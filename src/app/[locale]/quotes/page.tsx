@@ -2,6 +2,7 @@ import { Star } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { BookCover } from "@/components/leaf/book-cover";
 import { Button } from "@/components/ui/button";
+import { Select } from "@/components/ui/select";
 import { Link } from "@/i18n/navigation";
 import { isOwner } from "@/lib/auth/owner-session";
 import { listQuoteFilters, listQuotes } from "@/lib/reading-entries";
@@ -46,17 +47,17 @@ export default async function QuotesPage({
 
       {databaseReady && <form method="get" className="mt-9 grid gap-3 rounded-xl border border-border bg-card p-4 sm:grid-cols-[minmax(0,1fr)_auto_auto_auto]">
         <label htmlFor="quote-search" className="sr-only">{t("search")}</label>
-        <input id="quote-search" name="q" type="search" maxLength={100} defaultValue={search} placeholder={t("search")} className="h-10 min-w-0 rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50" />
+        <input id="quote-search" name="q" type="search" maxLength={100} defaultValue={search} placeholder={t("search")} className="h-10 min-w-0 rounded-lg border border-input bg-field px-3 text-sm outline-none" />
         <label htmlFor="quote-book" className="sr-only">{t("bookFilter")}</label>
-        <select id="quote-book" name="book" defaultValue={bookId ?? ""} className="h-10 rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50">
+        <Select id="quote-book" name="book" defaultValue={bookId ?? ""} containerClassName="min-w-44">
           <option value="">{t("allBooks")}</option>
           {filters.books.map((book) => <option key={book.id} value={book.id}>{book.title}</option>)}
-        </select>
+        </Select>
         <label htmlFor="quote-author" className="sr-only">{t("authorFilter")}</label>
-        <select id="quote-author" name="author" defaultValue={authorId ?? ""} className="h-10 rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50">
+        <Select id="quote-author" name="author" defaultValue={authorId ?? ""} containerClassName="min-w-44">
           <option value="">{t("allAuthors")}</option>
           {filters.authors.map((author) => <option key={author.id} value={author.id}>{author.name}</option>)}
-        </select>
+        </Select>
         <button type="submit" className="h-10 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/80">{t("apply")}</button>
       </form>}
 
