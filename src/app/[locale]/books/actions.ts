@@ -84,5 +84,6 @@ export async function deleteBook(formData: FormData): Promise<void> {
   await getDb().book.delete({ where: { id } });
   const locale = localeFromForm(formData);
   revalidatePath(getPathname({ href: "/", locale }));
+  revalidatePath(getPathname({ href: "/quotes", locale }));
   redirect(getPathname({ href: "/", locale }));
 }

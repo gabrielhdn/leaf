@@ -51,6 +51,7 @@ export async function SiteHeader() {
             >
               {t("library")}
             </Link>
+            <Link href="/quotes" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">{t("quotes")}</Link>
             {owner && process.env.DATABASE_URL && <Link href="/books/new" className="inline-flex items-center gap-1 text-sm font-medium text-brand hover:underline"><Plus className="size-4" aria-hidden="true" />{t("addBook")}</Link>}
             <Link
               href="/login"

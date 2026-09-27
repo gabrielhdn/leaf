@@ -5,6 +5,7 @@
   },
   "Navigation": {
     "library": "Library",
+    "quotes": "Quotes",
     "search": "Search books",
     "addBook": "Add book",
     "access": "Access",
@@ -82,6 +83,55 @@
       "delete": "Delete",
       "deleteConfirm": "Delete this book and all its reading records?"
     }
+  },
+  "ReadingEntries": {
+    "quote": {
+      "eyebrow": "Saved words",
+      "title": "Quotes",
+      "description": "Passages from the book worth keeping.",
+      "content": "Quoted passage",
+      "add": "Add quote",
+      "empty": "No quotes saved for this book yet.",
+      "favorite": "Favorite",
+      "markFavorite": "Mark as favorite",
+      "unfavorite": "Remove from favorites"
+    },
+    "note": {
+      "eyebrow": "Reading impressions",
+      "title": "Notes",
+      "description": "Ideas, questions, and observations along the way.",
+      "content": "Your note",
+      "add": "Add note",
+      "empty": "No notes saved for this book yet."
+    },
+    "pageLabel": "Page",
+    "page": "p. {page}",
+    "save": "Save",
+    "saving": "Saving...",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Delete this entry?",
+    "invalid": "Enter some text and, if adding a page, use a positive number.",
+    "notFound": "This entry or book was not found."
+  },
+  "Quotes": {
+    "eyebrow": "Reading fragments",
+    "title": "Quotes",
+    "description": "A collection of passages that stayed with you.",
+    "search": "Search passage, book, or author",
+    "bookFilter": "Filter by book",
+    "authorFilter": "Filter by author",
+    "allBooks": "All books",
+    "allAuthors": "All authors",
+    "apply": "Filter",
+    "clear": "Clear filters",
+    "page": "p. {page}",
+    "favorite": "Favorite",
+    "markFavorite": "Mark as favorite",
+    "unfavorite": "Remove from favorites",
+    "empty": "Quotes from your books will appear here.",
+    "noResults": "No quotes match your search or filters.",
+    "databaseUnavailable": "Quotes will be available once the database connection is configured."
   },
   "Access": {
     "eyebrow": "Owner space",

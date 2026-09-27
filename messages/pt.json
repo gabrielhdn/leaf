@@ -5,6 +5,7 @@
   },
   "Navigation": {
     "library": "Biblioteca",
+    "quotes": "Citações",
     "search": "Buscar livros",
     "addBook": "Adicionar",
     "access": "Acesso",
@@ -82,6 +83,55 @@
       "delete": "Excluir",
       "deleteConfirm": "Excluir este livro e todos os registros de leitura associados?"
     }
+  },
+  "ReadingEntries": {
+    "quote": {
+      "eyebrow": "Palavras guardadas",
+      "title": "Citações",
+      "description": "Trechos da obra que merecem permanecer.",
+      "content": "Trecho citado",
+      "add": "Adicionar citação",
+      "empty": "Nenhuma citação guardada para este livro.",
+      "favorite": "Favorita",
+      "markFavorite": "Marcar como favorita",
+      "unfavorite": "Remover dos favoritos"
+    },
+    "note": {
+      "eyebrow": "Impressões da leitura",
+      "title": "Notas",
+      "description": "Ideias, perguntas e observações ao longo da leitura.",
+      "content": "Sua nota",
+      "add": "Adicionar nota",
+      "empty": "Nenhuma nota guardada para este livro."
+    },
+    "pageLabel": "Página",
+    "page": "p. {page}",
+    "save": "Salvar",
+    "saving": "Salvando...",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "deleteConfirm": "Excluir este registro?",
+    "invalid": "Escreva um texto e, se informar a página, use um número positivo.",
+    "notFound": "Este registro ou livro não foi encontrado."
+  },
+  "Quotes": {
+    "eyebrow": "Fragmentos de leitura",
+    "title": "Citações",
+    "description": "Uma coleção de passagens que ficaram com você.",
+    "search": "Buscar trecho, livro ou autor",
+    "bookFilter": "Filtrar por livro",
+    "authorFilter": "Filtrar por autor",
+    "allBooks": "Todos os livros",
+    "allAuthors": "Todos os autores",
+    "apply": "Filtrar",
+    "clear": "Limpar filtros",
+    "page": "p. {page}",
+    "favorite": "Favorita",
+    "markFavorite": "Marcar como favorita",
+    "unfavorite": "Remover dos favoritos",
+    "empty": "As citações dos seus livros aparecerão aqui.",
+    "noResults": "Nenhuma citação corresponde à busca ou aos filtros.",
+    "databaseUnavailable": "As citações estarão disponíveis quando a conexão com o banco de dados for configurada."
   },
   "Access": {
     "eyebrow": "Espaço do proprietário",
