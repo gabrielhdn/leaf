@@ -5,6 +5,7 @@
   },
   "Navigation": {
     "library": "Biblioteca",
+    "access": "Acesso",
     "language": "Idioma",
     "theme": "Tema",
     "light": "Claro",
@@ -20,5 +21,18 @@
     "shelfTitle": "Um lugar para suas próximas leituras",
     "shelfDescription": "Seus livros aparecerão aqui, sempre ao alcance de uma nova descoberta.",
     "illustrationAlt": "Ilustração de uma folha nascendo das páginas de um livro"
+  },
+  "Access": {
+    "eyebrow": "Espaço do proprietário",
+    "title": "Acesso à biblioteca",
+    "description": "Entre para organizar os livros e guardar suas leituras.",
+    "password": "Senha",
+    "submit": "Entrar",
+    "submitting": "Entrando...",
+    "invalid": "Senha incorreta. Tente novamente.",
+    "unavailable": "O acesso privado ainda não está disponível.",
+    "signedIn": "Você está conectado à área privada.",
+    "signOut": "Sair",
+    "back": "Voltar à biblioteca"
   }
 }

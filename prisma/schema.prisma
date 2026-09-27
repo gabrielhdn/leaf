@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum OwnershipStatus {
+  OWNED
+  WISHLIST
+}
+
+enum ReadingStatus {
+  WANT_TO_READ
+  READING
+  READ
+  ABANDONED
+}
+
+model Book {
+  id              String             @id @default(uuid()) @db.Uuid
+  title           String
+  description     String?            @db.Text
+  coverUrl        String?            @db.Text
+  isbn            String?            @unique
+  publicationYear Int?
+  pageCount       Int?
+  ownershipStatus OwnershipStatus    @default(OWNED)
+  readingStatus   ReadingStatus      @default(WANT_TO_READ)
+  rating          Int?
+  startedAt       DateTime?          @db.Timestamptz(3)
+  finishedAt      DateTime?          @db.Timestamptz(3)
+  assimilatedAt   DateTime?          @db.Timestamptz(3)
+  createdAt       DateTime           @default(now()) @db.Timestamptz(3)
+  updatedAt       DateTime           @updatedAt @db.Timestamptz(3)
+  authors         BookAuthor[]
+  quotes          Quote[]
+  notes           BookNote[]
+  reflection      ReadingReflection?
+
+  @@index([ownershipStatus, readingStatus])
+  @@index([createdAt])
+}
+
+model Author {
+  id        String       @id @default(uuid()) @db.Uuid
+  name      String
+  books     BookAuthor[]
+  createdAt DateTime     @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime     @updatedAt @db.Timestamptz(3)
+}
+
+model BookAuthor {
+  bookId   String @db.Uuid
+  authorId String @db.Uuid
+  book     Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  author   Author @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@id([bookId, authorId])
+  @@index([authorId])
+}
+
+model Quote {
+  id         String   @id @default(uuid()) @db.Uuid
+  bookId     String   @db.Uuid
+  book       Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  content    String   @db.Text
+  page       Int?
+  isFavorite Boolean  @default(false)
+  createdAt  DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt  DateTime @updatedAt @db.Timestamptz(3)
+
+  @@index([bookId, createdAt])
+}
+
+model BookNote {
+  id        String   @id @default(uuid()) @db.Uuid
+  bookId    String   @db.Uuid
+  book      Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  content   String   @db.Text
+  page      Int?
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  @@index([bookId, createdAt])
+}
+
+model ReadingReflection {
+  id        String   @id @default(uuid()) @db.Uuid
+  bookId    String   @unique @db.Uuid
+  book      Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  content   String?  @db.Text
+  keyIdeas  String[] @default([])
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+}

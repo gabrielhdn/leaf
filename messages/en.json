@@ -5,6 +5,7 @@
   },
   "Navigation": {
     "library": "Library",
+    "access": "Access",
     "language": "Language",
     "theme": "Theme",
     "light": "Light",
@@ -20,5 +21,18 @@
     "shelfTitle": "A place for your next reads",
     "shelfDescription": "Your books will appear here, always within reach of a new discovery.",
     "illustrationAlt": "Illustration of a leaf rising from the pages of a book"
+  },
+  "Access": {
+    "eyebrow": "Owner space",
+    "title": "Library access",
+    "description": "Sign in to organize books and keep your reading notes.",
+    "password": "Password",
+    "submit": "Sign in",
+    "submitting": "Signing in...",
+    "invalid": "Incorrect password. Please try again.",
+    "unavailable": "Private access is not available yet.",
+    "signedIn": "You are signed in to the private area.",
+    "signOut": "Sign out",
+    "back": "Back to the library"
   }
 }

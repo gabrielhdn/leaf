@@ -35,13 +35,18 @@ export async function SiteHeader() {
         </Link>
 
         <div className="flex items-center gap-3 sm:gap-5">
-          <nav aria-label={t("library")} className="hidden sm:block">
+          <nav aria-label={t("library")} className="flex items-center gap-6">
             <Link
               href="/"
-              aria-current="page"
-              className="text-sm font-medium text-foreground underline decoration-warm-accent decoration-2 underline-offset-[0.65rem]"
+              className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:inline"
             >
               {t("library")}
+            </Link>
+            <Link
+              href="/login"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {t("access")}
             </Link>
           </nav>
           <LocaleSwitcher />

@@ -37,7 +37,7 @@ Leaf busca uma experiência minimalista, acolhedora e contemporânea, com os liv
 
 ## Desenvolvimento local
 
-Requer Node.js 20.9 ou superior. Para executar a interface:
+Requer Node.js 22.12 ou superior. Para executar a interface:
 
 ```bash
 npm install
@@ -52,8 +52,25 @@ Para validar o código:
 npm run lint
 npm run typecheck
 npm run build
+npm run test
 ```
+
+## Banco de dados e acesso privado
+
+O esquema Prisma e a migração inicial estão em `prisma/`. Até que um projeto Neon seja configurado, a página pública funciona sem banco; o cadastro e a leitura de dados reais ainda não foram implementados.
+
+Copie `.env.example` para `.env` e configure:
+
+- `DATABASE_URL`: conexão com pool do Neon para a aplicação;
+- `DIRECT_URL`: conexão direta do Neon para migrações;
+- `AUTH_SECRET`: segredo aleatório para as sessões do Auth.js (`openssl rand -base64 32`);
+- `AUTH_TRUST_HOST=true`: permite ao Auth.js usar o host da aplicação;
+- `LEAF_OWNER_PASSWORD`: senha única e forte, com pelo menos 16 caracteres, para liberar a escrita.
+
+Os valores são segredos: mantenha o arquivo `.env` fora do Git e configure as mesmas variáveis na Vercel quando fizer a implantação. Sem os segredos de acesso, a página pública permanece disponível e o login fica desativado.
+
+Depois de criar o banco Neon, aplique a migração com `npm run db:deploy`. A aplicação usa a conexão com pool para consultas e a conexão direta para as migrações. Os arquivos de código do Prisma Client são gerados automaticamente após `npm install`.
 
 ## Estado do projeto
 
-A base visual e técnica está pronta. O cadastro de livros, o banco de dados, a autenticação e a implantação serão adicionados nos próximos blocos.
+A base visual, o esquema de dados e o acesso privado estão preparados. O cadastro de livros, a conexão ao banco Neon e a implantação serão concluídos nos próximos blocos.
