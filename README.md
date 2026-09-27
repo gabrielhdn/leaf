@@ -73,4 +73,6 @@ Depois de criar o banco Neon, aplique a migração com `npm run db:deploy`. A ap
 
 ## Estado do projeto
 
-A base visual, o esquema de dados e o acesso privado estão preparados. O proprietário pode cadastrar, editar e excluir livros com múltiplos autores, capa por URL, dados bibliográficos e estados independentes de posse e leitura. Cada livro aceita citações e notas, com criação, edição e exclusão; citações podem ser destacadas como favoritas. A biblioteca e a coleção global de citações são públicas e pesquisáveis. A conexão a um projeto Neon, a interface da Great Work, a reflexão final e a implantação ainda dependem dos próximos blocos.
+A aplicação inclui cadastro de livros, citações e notas, biblioteca pesquisável, lista de desejos, leituras agrupadas e visão geral da Great Work. Ao terminar um livro, o proprietário pode registrar avaliação, reflexão e ideias principais, ou assimilá-lo sem escrever nada. A etapa é derivada do estado da leitura: concluir leva a Citrinitas e assimilar leva a Rubedo. A leitura é pública; todas as alterações exigem acesso do proprietário.
+
+Faltam conectar um projeto Neon, testar os fluxos com dados persistidos e configurar a publicação na Vercel.

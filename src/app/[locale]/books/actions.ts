@@ -25,6 +25,12 @@ function localeFromForm(formData: FormData) {
     : routing.defaultLocale;
 }
 
+function revalidateLibraryViews(locale: string) {
+  for (const href of ["/", "/reading", "/wishlist", "/great-work"] as const) {
+    revalidatePath(getPathname({ href, locale }));
+  }
+}
+
 export async function submitBook(
   id: string | null,
   _previous: BookFormState,
@@ -47,7 +53,7 @@ export async function submitBook(
   if (!book) return { error: "notFound" };
 
   const locale = localeFromForm(formData);
-  revalidatePath(getPathname({ href: "/", locale }));
+  revalidateLibraryViews(locale);
   redirect(getPathname({ href: `/books/${book.id}`, locale }));
 }
 
@@ -72,7 +78,7 @@ export async function updateBookStatus(formData: FormData): Promise<void> {
     },
   });
   const locale = localeFromForm(formData);
-  revalidatePath(getPathname({ href: "/", locale }));
+  revalidateLibraryViews(locale);
   revalidatePath(getPathname({ href: `/books/${id}`, locale }));
 }
 
@@ -83,7 +89,7 @@ export async function deleteBook(formData: FormData): Promise<void> {
 
   await getDb().book.delete({ where: { id } });
   const locale = localeFromForm(formData);
-  revalidatePath(getPathname({ href: "/", locale }));
+  revalidateLibraryViews(locale);
   revalidatePath(getPathname({ href: "/quotes", locale }));
   redirect(getPathname({ href: "/", locale }));
 }

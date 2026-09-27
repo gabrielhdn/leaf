@@ -7,6 +7,7 @@ export const readingStatuses = [
 
 export type ReadingStatus = (typeof readingStatuses)[number];
 export type GreatWorkStage = "NIGREDO" | "ALBEDO" | "CITRINITAS" | "RUBEDO";
+export const greatWorkStages: GreatWorkStage[] = ["NIGREDO", "ALBEDO", "CITRINITAS", "RUBEDO"];
 
 export type ReadingJourney = {
   readingStatus: ReadingStatus;

@@ -5,6 +5,10 @@
   },
   "Navigation": {
     "library": "Biblioteca",
+    "navigation": "Navegação principal",
+    "reading": "Leitura",
+    "wishlist": "Lista de desejos",
+    "greatWork": "Great Work",
     "quotes": "Citações",
     "search": "Buscar livros",
     "addBook": "Adicionar",
@@ -41,6 +45,8 @@
       "reading": "Leitura",
       "allOwnership": "Todos os livros",
       "allReading": "Todos os estados",
+      "stage": "Etapa Great Work",
+      "allStages": "Todas as etapas",
       "apply": "Filtrar",
       "clear": "Limpar filtros"
     },
@@ -132,6 +138,94 @@
     "empty": "As citações dos seus livros aparecerão aqui.",
     "noResults": "Nenhuma citação corresponde à busca ou aos filtros.",
     "databaseUnavailable": "As citações estarão disponíveis quando a conexão com o banco de dados for configurada."
+  },
+  "GreatWork": {
+    "eyebrow": "Solve et Coagula",
+    "title": "A jornada Great Work",
+    "overviewDescription": "Quatro momentos para acompanhar o que cada leitura desperta, transforma e deixa em você.",
+    "viewOverview": "Explorar a jornada Great Work",
+    "step": "Etapa {number}",
+    "timeline": "Linha do tempo da leitura",
+    "dates": {
+      "startedAt": "Início",
+      "finishedAt": "Conclusão",
+      "assimilatedAt": "Assimilação"
+    },
+    "stages": {
+      "NIGREDO": { "name": "Nigredo", "subtitle": "Possibilidade", "description": "O livro ainda espera seu encontro com você." },
+      "ALBEDO": { "name": "Albedo", "subtitle": "Leitura em curso", "description": "Trechos e impressões começam a ganhar forma." },
+      "CITRINITAS": { "name": "Citrinitas", "subtitle": "Reflexão após a leitura", "description": "A leitura terminou; o que permaneceu pode ser reunido." },
+      "RUBEDO": { "name": "Rubedo", "subtitle": "Obra assimilada", "description": "O que foi lido passa a fazer parte do seu repertório." }
+    },
+    "current": {
+      "NIGREDO": "Este livro está à espera de ser lido.",
+      "ALBEDO": "A leitura está em curso. Guarde trechos e impressões ao longo do caminho.",
+      "CITRINITAS": "O livro foi concluído. A reflexão é um convite, não uma obrigação.",
+      "RUBEDO": "Esta leitura foi assimilada e agora faz parte do seu repertório."
+    },
+    "abandoned": "Esta leitura foi interrompida e está fora das quatro etapas por enquanto.",
+    "bookCount": "{count, plural, one {# livro} other {# livros}}",
+    "browseStage": "Ver na biblioteca",
+    "emptyStage": "Nenhum livro nesta etapa ainda.",
+    "abandonedTitle": "Leituras interrompidas",
+    "abandonedDescription": "Livros interrompidos permanecem na biblioteca sem serem forçados a uma etapa da Great Work.",
+    "databaseUnavailable": "A jornada aparecerá quando a conexão com o banco de dados for configurada."
+  },
+  "Reflection": {
+    "citrinitasEyebrow": "Citrinitas · O que permaneceu",
+    "citrinitasTitle": "Depois da última página",
+    "citrinitasDescription": "Reúna o que ficou desta leitura, se quiser. Você também pode assimilá-la sem escrever uma reflexão.",
+    "rubedoEyebrow": "Rubedo · Síntese",
+    "rubedoTitle": "O que ficou com você",
+    "rubedoDescription": "Um registro da leitura que agora faz parte do seu repertório.",
+    "contentLabel": "Reflexão final",
+    "ideasLabel": "Ideias principais",
+    "ideasHelp": "Escreva uma ideia por linha. Tudo será preservado como você escreveu.",
+    "ratingLabel": "Avaliação",
+    "noRating": "Sem avaliação",
+    "favoriteQuotes": "Citações favoritas",
+    "noFavoriteQuotes": "Nenhuma citação marcada como favorita.",
+    "seeAllQuotes": "Ver todas as citações",
+    "readingNotes": "Notas de leitura",
+    "noNotes": "Nenhuma nota registrada.",
+    "seeAllNotes": "Ver todas as notas",
+    "add": "Escrever reflexão",
+    "edit": "Editar reflexão",
+    "save": "Salvar reflexão",
+    "saving": "Salvando...",
+    "optional": "A reflexão é opcional. Assimilar a leitura é uma ação separada.",
+    "assimilate": "Assimilar leitura",
+    "invalid": "Confira a avaliação e as ideias principais e tente novamente.",
+    "notFinished": "Marque o livro como lido antes de refletir ou assimilá-lo."
+  },
+  "ReadingView": {
+    "eyebrow": "No ritmo da leitura",
+    "title": "Suas leituras",
+    "description": "Livros que esperam, livros em curso e histórias já terminadas.",
+    "groups": {
+      "WANT_TO_READ": "Quero ler",
+      "READING": "Lendo",
+      "READ": "Lidos",
+      "ABANDONED": "Interrompidos"
+    },
+    "emptyGroup": "Nenhum livro neste grupo ainda.",
+    "databaseUnavailable": "As leituras aparecerão quando a conexão com o banco de dados for configurada."
+  },
+  "Wishlist": {
+    "eyebrow": "Livros por descobrir",
+    "title": "Lista de desejos",
+    "description": "Um espaço para os livros que você deseja trazer para a sua biblioteca.",
+    "empty": "Nenhum livro na lista de desejos ainda.",
+    "databaseUnavailable": "A lista de desejos aparecerá quando a conexão com o banco de dados for configurada."
+  },
+  "Feedback": {
+    "loading": "Preparando sua leitura...",
+    "errorTitle": "Não foi possível abrir esta página",
+    "errorDescription": "Algo interrompeu a leitura dos dados. Tente novamente em instantes.",
+    "retry": "Tentar novamente",
+    "notFoundTitle": "Página não encontrada",
+    "notFoundDescription": "Este endereço não leva a um livro da biblioteca.",
+    "back": "Voltar à biblioteca"
   },
   "Access": {
     "eyebrow": "Espaço do proprietário",

@@ -1,7 +1,8 @@
 import { BookOpenText, Plus } from "lucide-react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { BookCover } from "@/components/leaf/book-cover";
+import { BookCard } from "@/components/leaf/book-card";
+import { greatWorkStages } from "@/domain/reading-journey";
 import { Link } from "@/i18n/navigation";
 import { isOwner } from "@/lib/auth/owner-session";
 import { listBooks, type BookFilter } from "@/lib/books";
@@ -18,18 +19,21 @@ function value(params: Record<string, string | string[] | undefined>, key: strin
 export default async function HomePage({ searchParams }: { searchParams: SearchParams }) {
   const t = await getTranslations("Home");
   const booksT = await getTranslations("Books");
+  const greatT = await getTranslations("GreatWork");
   const params = await searchParams;
   const search = value(params, "q").trim().slice(0, 100);
   const ownershipValue = value(params, "ownership");
   const readingValue = value(params, "reading");
+  const stageValue = value(params, "stage");
   const filter: BookFilter = {
     search: search || undefined,
     ownership: ownershipValue === "OWNED" || ownershipValue === "WISHLIST" ? ownershipValue : undefined,
     reading: ["WANT_TO_READ", "READING", "READ", "ABANDONED"].includes(readingValue)
       ? readingValue as BookFilter["reading"]
       : undefined,
+    stage: greatWorkStages.find((stage) => stage === stageValue),
   };
-  const hasFilter = Boolean(filter.search || filter.ownership || filter.reading);
+  const hasFilter = Boolean(filter.search || filter.ownership || filter.reading || filter.stage);
   const databaseReady = Boolean(process.env.DATABASE_URL);
   const [allBooks, owner] = await Promise.all([
     databaseReady ? listBooks() : Promise.resolve([]),
@@ -81,10 +85,11 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
             ["assimilated", allBooks.filter((book) => book.assimilatedAt).length],
           ] as const).map(([key, count]) => <div key={key} className="rounded-xl border border-border bg-card px-4 py-4"><dt className="text-xs text-muted-foreground">{booksT(`summary.${key}`)}</dt><dd className="mt-2 font-heading text-3xl text-brand">{count}</dd></div>)}
         </dl>}
+        {allBooks.length > 0 && <Link href="/great-work" className="mt-4 inline-block text-sm text-brand underline decoration-warm-accent underline-offset-4">{greatT("viewOverview")}</Link>}
 
-        {databaseReady && <form method="get" className="mt-8 grid gap-3 rounded-xl border border-border bg-card p-4 sm:grid-cols-[minmax(0,1fr)_auto_auto_auto]">
+        {databaseReady && <form method="get" className="mt-8 grid gap-3 rounded-xl border border-border bg-card p-4 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_repeat(4,auto)]">
           <label className="sr-only" htmlFor="book-search">{booksT("filters.search")}</label>
-          <input id="book-search" name="q" type="search" maxLength={100} defaultValue={search} placeholder={booksT("filters.search")} className="h-10 min-w-0 rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50" />
+          <input id="book-search" name="q" type="search" maxLength={100} defaultValue={search} placeholder={booksT("filters.search")} className="h-10 min-w-0 rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 sm:col-span-2 lg:col-span-1" />
           <label className="sr-only" htmlFor="ownership-filter">{booksT("filters.ownership")}</label>
           <select id="ownership-filter" name="ownership" defaultValue={filter.ownership ?? ""} className="h-10 rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50">
             <option value="">{booksT("filters.allOwnership")}</option>
@@ -99,16 +104,16 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
             <option value="READ">{booksT("form.read")}</option>
             <option value="ABANDONED">{booksT("form.abandoned")}</option>
           </select>
+          <label className="sr-only" htmlFor="stage-filter">{booksT("filters.stage")}</label>
+          <select id="stage-filter" name="stage" defaultValue={filter.stage ?? ""} className="h-10 rounded-lg border border-input bg-background px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50">
+            <option value="">{booksT("filters.allStages")}</option>
+            {greatWorkStages.map((stage) => <option key={stage} value={stage}>{greatT(`stages.${stage}.name`)}</option>)}
+          </select>
           <button type="submit" className="h-10 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/80">{booksT("filters.apply")}</button>
         </form>}
 
         {books.length ? <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-9 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {books.map((book) => <Link key={book.id} href={`/books/${book.id}`} className="group min-w-0">
-            <BookCover title={book.title} coverUrl={book.coverUrl} className="transition-transform group-hover:-translate-y-1" />
-            <h3 className="mt-3 line-clamp-2 font-heading text-2xl font-medium leading-tight text-brand group-hover:underline">{book.title}</h3>
-            <p className="mt-1 line-clamp-1 text-sm text-muted-foreground">{book.authors.map(({ author }) => author.name).join(", ")}</p>
-            <p className="mt-2 text-xs text-muted-foreground">{book.ownershipStatus === "WISHLIST" ? booksT("form.wishlist") : booksT(`form.${({ WANT_TO_READ: "wantToRead", READING: "readingNow", READ: "read", ABANDONED: "abandoned" } as const)[book.readingStatus]}`)}</p>
-          </Link>)}
+          {books.map((book) => <BookCard key={book.id} book={book} label={book.ownershipStatus === "WISHLIST" ? booksT("form.wishlist") : booksT(`form.${({ WANT_TO_READ: "wantToRead", READING: "readingNow", READ: "read", ABANDONED: "abandoned" } as const)[book.readingStatus]}`)} />)}
         </div> : <div className="mt-8 rounded-2xl border border-border bg-card px-6 py-10 sm:px-10">
           <p className="max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">{!databaseReady ? booksT("databaseUnavailable") : hasFilter ? booksT("noResults") : t("shelfDescription")}</p>
           {hasFilter && <Link href="/" className="mt-4 inline-block text-sm text-brand underline decoration-warm-accent underline-offset-4">{booksT("filters.clear")}</Link>}

@@ -49,4 +49,13 @@ describe("Great Work journey", () => {
     expect(reopened.assimilatedAt).toBeNull();
     expect(getGreatWorkStage(reopened)).toBe("ALBEDO");
   });
+
+  it("keeps assimilation when an already assimilated book remains read", () => {
+    const finished = changeReadingStatus(start, "READ", new Date("2026-01-15"));
+    const assimilated = assimilateReading(finished, new Date("2026-01-20"));
+    const unchanged = changeReadingStatus(assimilated, "READ", new Date("2026-02-01"));
+
+    expect(unchanged.assimilatedAt).toEqual(new Date("2026-01-20"));
+    expect(getGreatWorkStage(unchanged)).toBe("RUBEDO");
+  });
 });

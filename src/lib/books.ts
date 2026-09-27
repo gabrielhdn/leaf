@@ -2,13 +2,23 @@ import "server-only";
 import type { Prisma } from "@/generated/prisma/client";
 import { getDb } from "@/lib/db";
 import type { BookInput } from "@/domain/book-input";
-import { changeReadingStatus, type ReadingJourney } from "@/domain/reading-journey";
+import { changeReadingStatus, type GreatWorkStage, type ReadingJourney } from "@/domain/reading-journey";
 
 export type BookFilter = {
   search?: string;
   ownership?: "OWNED" | "WISHLIST";
   reading?: "WANT_TO_READ" | "READING" | "READ" | "ABANDONED";
+  stage?: GreatWorkStage;
 };
+
+function stageWhere(stage: GreatWorkStage): Prisma.BookWhereInput {
+  switch (stage) {
+    case "NIGREDO": return { readingStatus: "WANT_TO_READ" };
+    case "ALBEDO": return { readingStatus: "READING" };
+    case "CITRINITAS": return { readingStatus: "READ", assimilatedAt: null };
+    case "RUBEDO": return { readingStatus: "READ", assimilatedAt: { not: null } };
+  }
+}
 
 const bookInclude = {
   authors: { include: { author: true } },
@@ -19,6 +29,7 @@ export async function listBooks(filter: BookFilter = {}) {
   const where: Prisma.BookWhereInput = {
     ownershipStatus: filter.ownership,
     readingStatus: filter.reading,
+    AND: filter.stage ? [stageWhere(filter.stage)] : undefined,
     OR: filter.search
       ? [
           { title: { contains: filter.search, mode: "insensitive" } },

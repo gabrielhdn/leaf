@@ -5,9 +5,12 @@ import { Link } from "@/i18n/navigation";
 import { isOwner } from "@/lib/auth/owner-session";
 import { getBook } from "@/lib/books";
 import { listBookEntries } from "@/lib/reading-entries";
+import { getReflection } from "@/lib/reflections";
 import { deleteBook, updateBookStatus } from "../actions";
 import { DeleteButton } from "../delete-button";
 import { BookReadingEntries } from "./book-reading-entries";
+import { GreatWorkJourney } from "./great-work-journey";
+import { ReflectionSection } from "./reflection-section";
 
 export const dynamic = "force-dynamic";
 
@@ -18,7 +21,7 @@ export default async function BookPage({ params }: { params: Promise<{ locale: s
   if (!book) notFound();
 
   const t = await getTranslations("Books");
-  const [owner, entries] = await Promise.all([isOwner(), listBookEntries(id)]);
+  const [owner, entries, reflection] = await Promise.all([isOwner(), listBookEntries(id), getReflection(id)]);
   const dateFormat = new Intl.DateTimeFormat(locale, { day: "numeric", month: "long", year: "numeric" });
 
   return (
@@ -55,6 +58,8 @@ export default async function BookPage({ params }: { params: Promise<{ locale: s
           </div>}
         </div>
       </div>
+      <GreatWorkJourney journey={book} locale={locale} />
+      <ReflectionSection book={book} reflection={reflection} quotes={entries.quotes} notes={entries.notes} owner={owner} locale={locale} />
       <BookReadingEntries bookId={id} locale={locale} owner={owner} quotes={entries.quotes} notes={entries.notes} />
     </main>
   );

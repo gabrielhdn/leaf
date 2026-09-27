@@ -44,25 +44,18 @@ export async function SiteHeader() {
             <input id="global-search" name="q" type="search" maxLength={100} placeholder={t("search")} className="h-9 w-36 bg-transparent px-3 text-sm outline-none lg:w-48" />
             <button type="submit" aria-label={t("search")} className="flex size-9 items-center justify-center text-muted-foreground hover:text-foreground"><Search className="size-4" aria-hidden="true" /></button>
           </form>
-          <nav aria-label={t("library")} className="flex items-center gap-6">
-            <Link
-              href="/"
-              className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:inline"
-            >
-              {t("library")}
-            </Link>
-            <Link href="/quotes" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">{t("quotes")}</Link>
-            {owner && process.env.DATABASE_URL && <Link href="/books/new" className="inline-flex items-center gap-1 text-sm font-medium text-brand hover:underline"><Plus className="size-4" aria-hidden="true" />{t("addBook")}</Link>}
-            <Link
-              href="/login"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {t("access")}
-            </Link>
-          </nav>
+          {owner && process.env.DATABASE_URL && <Link href="/books/new" className="inline-flex items-center gap-1 text-sm font-medium text-brand hover:underline"><Plus className="size-4" aria-hidden="true" />{t("addBook")}</Link>}
+          <Link href="/login" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">{t("access")}</Link>
           <LocaleSwitcher />
           <ThemeSwitcher />
         </div>
+        <nav aria-label={t("navigation")} className="flex w-full items-center gap-6 overflow-x-auto border-t border-border/70 pt-3 text-sm font-medium whitespace-nowrap">
+          <Link href="/" className="text-muted-foreground transition-colors hover:text-foreground">{t("library")}</Link>
+          <Link href="/reading" className="text-muted-foreground transition-colors hover:text-foreground">{t("reading")}</Link>
+          <Link href="/wishlist" className="text-muted-foreground transition-colors hover:text-foreground">{t("wishlist")}</Link>
+          <Link href="/quotes" className="text-muted-foreground transition-colors hover:text-foreground">{t("quotes")}</Link>
+          <Link href="/great-work" className="text-muted-foreground transition-colors hover:text-foreground">{t("greatWork")}</Link>
+        </nav>
       </div>
     </header>
   );
