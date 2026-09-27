@@ -1,0 +1,24 @@
+{
+  "Metadata": {
+    "title": "Leaf — Sua biblioteca pessoal",
+    "description": "Um lugar para reunir livros, guardar ideias e acompanhar o que cada leitura deixa em você."
+  },
+  "Navigation": {
+    "library": "Biblioteca",
+    "language": "Idioma",
+    "theme": "Tema",
+    "light": "Claro",
+    "dark": "Escuro",
+    "system": "Sistema"
+  },
+  "Home": {
+    "eyebrow": "Uma biblioteca para habitar",
+    "title": "Todo livro deixa algo em nós.",
+    "description": "Reúna os livros que você tem, os que deseja ler e as ideias que merecem permanecer. Um espaço tranquilo para acompanhar a leitura e dar forma ao que ela transforma.",
+    "motto": "Solve et Coagula",
+    "shelfLabel": "Sua estante",
+    "shelfTitle": "Um lugar para suas próximas leituras",
+    "shelfDescription": "Seus livros aparecerão aqui, sempre ao alcance de uma nova descoberta.",
+    "illustrationAlt": "Ilustração de uma folha nascendo das páginas de um livro"
+  }
+}

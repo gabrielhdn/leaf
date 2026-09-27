@@ -1,0 +1,24 @@
+{
+  "Metadata": {
+    "title": "Leaf — Your personal library",
+    "description": "A place to gather books, keep ideas, and remember what each reading leaves with you."
+  },
+  "Navigation": {
+    "library": "Library",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "Home": {
+    "eyebrow": "A library to dwell in",
+    "title": "Every book leaves something with us.",
+    "description": "Gather the books you own, the ones you hope to read, and the ideas worth keeping. A quiet space to follow your reading and give shape to what it changes.",
+    "motto": "Solve et Coagula",
+    "shelfLabel": "Your shelf",
+    "shelfTitle": "A place for your next reads",
+    "shelfDescription": "Your books will appear here, always within reach of a new discovery.",
+    "illustrationAlt": "Illustration of a leaf rising from the pages of a book"
+  }
+}
