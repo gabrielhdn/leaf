@@ -77,7 +77,8 @@
       "saving": "Salvando...",
       "invalid": "Confira os campos e tente novamente.",
       "duplicateIsbn": "Já existe um livro com esse ISBN.",
-      "notFound": "Este livro não foi encontrado."
+      "notFound": "Este livro não foi encontrado.",
+      "pageCountBelowCurrent": "O total de páginas não pode ser menor que a página atual."
     },
     "detail": {
       "eyebrow": "Na estante",
@@ -86,7 +87,11 @@
       "startedAt": "Início da leitura",
       "finishedAt": "Fim da leitura",
       "edit": "Editar",
-      "updateStatus": "Atualizar estados",
+      "updateStatus": "Salvar alterações",
+      "currentPage": "Página atual",
+      "currentPageHelp": "Até {total} páginas.",
+      "currentPageNoTotal": "Informe o total de páginas para ver o progresso.",
+      "invalidCurrentPage": "Informe uma página atual válida, dentro do total de páginas do livro.",
       "delete": "Excluir",
       "deleteConfirm": "Excluir este livro e todos os registros de leitura associados?"
     }

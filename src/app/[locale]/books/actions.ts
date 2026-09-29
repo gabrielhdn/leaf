@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { bookInputSchema, parseBookForm } from "@/domain/book-input";
+import { PageCountBelowCurrentPageError, parseCurrentPage } from "@/domain/reading-progress";
 import { changeReadingStatus } from "@/domain/reading-journey";
 import { getPathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
@@ -13,7 +14,11 @@ import { getDb } from "@/lib/db";
 import { saveBook } from "@/lib/books";
 
 export type BookFormState = {
-  error: "invalid" | "duplicateIsbn" | "notFound" | null;
+  error: "invalid" | "duplicateIsbn" | "notFound" | "pageCountBelowCurrent" | null;
+};
+
+export type BookStatusFormState = {
+  error: "invalid" | "invalidCurrentPage" | null;
 };
 
 const statusSchema = bookInputSchema.pick({ ownershipStatus: true, readingStatus: true });
@@ -44,6 +49,7 @@ export async function submitBook(
   try {
     book = await saveBook(parsed.data, id ?? undefined);
   } catch (error) {
+    if (error instanceof PageCountBelowCurrentPageError) return { error: "pageCountBelowCurrent" };
     if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
       return { error: "duplicateIsbn" };
     }
@@ -57,29 +63,35 @@ export async function submitBook(
   redirect(getPathname({ href: `/books/${book.id}`, locale }));
 }
 
-export async function updateBookStatus(formData: FormData): Promise<void> {
+export async function updateBookStatus(_previous: BookStatusFormState, formData: FormData): Promise<BookStatusFormState> {
   await requireOwner();
   const id = formData.get("id");
-  if (typeof id !== "string" || !/^[0-9a-f-]{36}$/i.test(id)) return;
+  if (typeof id !== "string" || !/^[0-9a-f-]{36}$/i.test(id)) return { error: "invalid" };
   const parsed = statusSchema.safeParse({
     ownershipStatus: formData.get("ownershipStatus"),
     readingStatus: formData.get("readingStatus"),
   });
-  if (!parsed.success) return;
+  if (!parsed.success) return { error: "invalid" };
 
   const db = getDb();
   const current = await db.book.findUnique({ where: { id } });
-  if (!current) return;
+  if (!current) return { error: "invalid" };
+  const rawPage = formData.get("currentPage");
+  if (typeof rawPage !== "string") return { error: "invalidCurrentPage" };
+  const currentPage = parseCurrentPage(rawPage, current.pageCount);
+  if (currentPage === undefined) return { error: "invalidCurrentPage" };
   await db.book.update({
     where: { id },
     data: {
       ownershipStatus: parsed.data.ownershipStatus,
+      currentPage,
       ...changeReadingStatus(current, parsed.data.readingStatus),
     },
   });
   const locale = localeFromForm(formData);
   revalidateLibraryViews(locale);
   revalidatePath(getPathname({ href: `/books/${id}`, locale }));
+  return { error: null };
 }
 
 export async function deleteBook(formData: FormData): Promise<void> {

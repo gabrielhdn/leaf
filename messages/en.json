@@ -77,7 +77,8 @@
       "saving": "Saving...",
       "invalid": "Check the fields and try again.",
       "duplicateIsbn": "A book with this ISBN already exists.",
-      "notFound": "This book was not found."
+      "notFound": "This book was not found.",
+      "pageCountBelowCurrent": "The total page count cannot be less than the current page."
     },
     "detail": {
       "eyebrow": "On the shelf",
@@ -86,7 +87,11 @@
       "startedAt": "Reading started",
       "finishedAt": "Reading finished",
       "edit": "Edit",
-      "updateStatus": "Update statuses",
+      "updateStatus": "Save changes",
+      "currentPage": "Current page",
+      "currentPageHelp": "Up to {total} pages.",
+      "currentPageNoTotal": "Add a total page count to see progress.",
+      "invalidCurrentPage": "Enter a valid current page within the book's total page count.",
       "delete": "Delete",
       "deleteConfirm": "Delete this book and all its reading records?"
     }

@@ -27,6 +27,7 @@ model Book {
   isbn            String?            @unique
   publicationYear Int?
   pageCount       Int?
+  currentPage     Int?
   ownershipStatus OwnershipStatus    @default(OWNED)
   readingStatus   ReadingStatus      @default(WANT_TO_READ)
   rating          Int?

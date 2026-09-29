@@ -2,6 +2,7 @@ import "server-only";
 import type { Prisma } from "@/generated/prisma/client";
 import { getDb } from "@/lib/db";
 import type { BookInput } from "@/domain/book-input";
+import { PageCountBelowCurrentPageError } from "@/domain/reading-progress";
 import { changeReadingStatus, type GreatWorkStage, type ReadingJourney } from "@/domain/reading-journey";
 
 export type BookFilter = {
@@ -65,6 +66,9 @@ export async function saveBook(input: BookInput, id?: string) {
   return db.$transaction(async (tx) => {
     const current = id ? await tx.book.findUnique({ where: { id } }) : null;
     if (id && !current) return null;
+    if (current && current.currentPage !== null && input.pageCount !== undefined && current.currentPage > input.pageCount) {
+      throw new PageCountBelowCurrentPageError();
+    }
     const authors = await authorRelations(tx, input.authors);
 
     const journey: ReadingJourney = current ?? {
