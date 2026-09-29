@@ -1,6 +1,7 @@
 import { BookOpenText, Plus } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { BookCard } from "@/components/leaf/book-card";
+import { HomeDashboard } from "@/components/leaf/home-dashboard";
 import { Select } from "@/components/ui/select";
 import { greatWorkStages } from "@/domain/reading-journey";
 import { Link } from "@/i18n/navigation";
@@ -42,9 +43,11 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
   const books = databaseReady && hasFilter ? await listBooks(filter) : allBooks;
 
   return (
-    <main className="mx-auto w-full max-w-7xl px-5 pb-20 pt-12 sm:px-8 sm:pt-16 lg:px-12 lg:pt-20">
-      <section className="max-w-4xl">
-        <div>
+    <main className="mx-auto w-full max-w-7xl px-5 pb-20 pt-12 sm:px-8 lg:px-12">
+      <section className="relative isolate min-h-[23rem] overflow-hidden pb-8 sm:min-h-[24rem] sm:pb-10">
+        <div aria-hidden="true" className="home-hero-art pointer-events-none absolute inset-0 -z-20" />
+        <div aria-hidden="true" className="home-hero-fade pointer-events-none absolute inset-0 -z-10" />
+        <div className="relative max-w-4xl pt-3 sm:pt-7">
           <p className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
             <span className="h-px w-9 bg-warm-accent" aria-hidden="true" />
             {t("eyebrow")}
@@ -52,36 +55,27 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
           <h1 className={`font-heading font-medium tracking-[-0.055em] text-brand ${allBooks.length ? "text-5xl leading-none sm:text-6xl" : "max-w-[15ch] text-[clamp(3.5rem,7vw,6.5rem)] leading-[0.95]"}`}>
             {t("title")}
           </h1>
-          <p className="mt-8 max-w-[38rem] text-base leading-8 text-muted-foreground sm:text-lg">
+          <p className="mt-5 max-w-[38rem] text-base leading-8 text-muted-foreground sm:text-lg">
             {t("description")}
           </p>
-          <p className="mt-9 font-heading text-2xl font-light italic tracking-[0.12em] text-brand">
+          <p className="mt-5 font-heading text-2xl font-light italic tracking-[0.12em] text-brand">
             {t("motto")}
           </p>
         </div>
-
       </section>
 
-      <section aria-labelledby="shelf-title" className={allBooks.length ? "mt-12" : "mt-14 sm:mt-16"}>
+      {databaseReady && <HomeDashboard books={allBooks} />}
+
+      <section id="library" aria-labelledby="shelf-title" className="mt-14 scroll-mt-6 sm:mt-16">
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>
             <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
               <BookOpenText className="size-4 text-brand" aria-hidden="true" />{t("shelfLabel")}
             </div>
-            <h2 id="shelf-title" className="mt-5 font-heading text-4xl font-medium leading-none tracking-tight text-brand sm:text-5xl">{t("shelfTitle")}</h2>
+            <h2 id="shelf-title" className="mt-5 font-heading text-4xl font-medium leading-none tracking-tight text-brand sm:text-5xl">{t(allBooks.length ? "shelfTitlePopulated" : "shelfTitle")}</h2>
           </div>
           {owner && databaseReady && <Link href="/books/new" className="inline-flex h-9 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/80"><Plus className="size-4" aria-hidden="true" />{booksT("add")}</Link>}
         </div>
-
-        {allBooks.length > 0 && <dl className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {([
-            ["total", allBooks.length],
-            ["reading", allBooks.filter((book) => book.readingStatus === "READING").length],
-            ["wishlist", allBooks.filter((book) => book.ownershipStatus === "WISHLIST").length],
-            ["assimilated", allBooks.filter((book) => book.assimilatedAt).length],
-          ] as const).map(([key, count]) => <div key={key} className="rounded-xl border border-border bg-card px-4 py-4"><dt className="text-xs text-muted-foreground">{booksT(`summary.${key}`)}</dt><dd className="mt-2 font-heading text-3xl text-brand">{count}</dd></div>)}
-        </dl>}
-        {allBooks.length > 0 && <Link href="/great-work" className="mt-4 inline-block text-sm text-brand underline decoration-warm-accent underline-offset-4">{greatT("viewOverview")}</Link>}
 
         {databaseReady && <form method="get" className="mt-8 grid gap-3 rounded-xl border border-border bg-card p-4 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_repeat(4,auto)]">
           <label className="sr-only" htmlFor="book-search">{booksT("filters.search")}</label>

@@ -28,7 +28,33 @@
     "motto": "Solve et Coagula",
     "shelfLabel": "Your shelf",
     "shelfTitle": "A place for your next reads",
-    "shelfDescription": "Your books will appear here, always within reach of a new discovery."
+    "shelfTitlePopulated": "My library",
+    "shelfDescription": "Your books will appear here, always within reach of a new discovery.",
+    "dashboard": {
+      "title": "Library overview",
+      "stats": {
+        "library": "Books in the library",
+        "reading": "Currently reading",
+        "completed": "Completed",
+        "wishlist": "On the wishlist"
+      },
+      "currentlyReading": "Currently reading",
+      "inProgress": "Reading in progress",
+      "noCurrentBook": "No book in progress right now. Choose one from the library to begin.",
+      "openBook": "View details",
+      "journey": "Your Great Work journey",
+      "readingProgress": "Reading progress",
+      "pageProgress": "Page {current} of {total}",
+      "progressUnavailable": "Add the current page and total page count to track progress.",
+      "stages": {
+        "NIGREDO": { "subtitle": "Preparation", "description": "Question, observe, and rethink." },
+        "ALBEDO": { "subtitle": "Understanding", "description": "Organize, study, and clarify." },
+        "CITRINITAS": { "subtitle": "Assimilation", "description": "Extract the essence and gain insights." },
+        "RUBEDO": { "subtitle": "Integration", "description": "Apply, share, and transform." }
+      },
+      "seeAll": "See all",
+      "seeOverview": "View overview"
+    }
   },
   "Books": {
     "add": "Add book",
@@ -76,9 +102,9 @@
       "save": "Save book",
       "saving": "Saving...",
       "invalid": "Check the fields and try again.",
+      "pageCountBelowCurrent": "The total page count cannot be less than the current page.",
       "duplicateIsbn": "A book with this ISBN already exists.",
-      "notFound": "This book was not found.",
-      "pageCountBelowCurrent": "The total page count cannot be less than the current page."
+      "notFound": "This book was not found."
     },
     "detail": {
       "eyebrow": "On the shelf",

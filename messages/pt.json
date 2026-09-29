@@ -28,7 +28,33 @@
     "motto": "Solve et Coagula",
     "shelfLabel": "Sua estante",
     "shelfTitle": "Um lugar para suas próximas leituras",
-    "shelfDescription": "Seus livros aparecerão aqui, sempre ao alcance de uma nova descoberta."
+    "shelfTitlePopulated": "Minha biblioteca",
+    "shelfDescription": "Seus livros aparecerão aqui, sempre ao alcance de uma nova descoberta.",
+    "dashboard": {
+      "title": "Visão geral da biblioteca",
+      "stats": {
+        "library": "Livros na biblioteca",
+        "reading": "Lendo atualmente",
+        "completed": "Concluídos",
+        "wishlist": "Na lista de desejos"
+      },
+      "currentlyReading": "Lendo atualmente",
+      "inProgress": "Leitura em andamento",
+      "noCurrentBook": "Nenhum livro em leitura no momento. Escolha um livro da biblioteca para começar.",
+      "openBook": "Ver detalhes",
+      "journey": "Sua jornada na Grande Obra",
+      "readingProgress": "Progresso da leitura",
+      "pageProgress": "Página {current} de {total}",
+      "progressUnavailable": "Informe a página atual e o total de páginas para acompanhar o progresso.",
+      "stages": {
+        "NIGREDO": { "subtitle": "Preparação", "description": "Questionar, observar e desconstruir." },
+        "ALBEDO": { "subtitle": "Compreensão", "description": "Organizar, estudar e clarear." },
+        "CITRINITAS": { "subtitle": "Assimilação", "description": "Extrair essência e gerar insights." },
+        "RUBEDO": { "subtitle": "Integração", "description": "Aplicar, compartilhar e transformar." }
+      },
+      "seeAll": "Ver todos",
+      "seeOverview": "Ver visão geral"
+    }
   },
   "Books": {
     "add": "Adicionar livro",
@@ -76,9 +102,9 @@
       "save": "Salvar livro",
       "saving": "Salvando...",
       "invalid": "Confira os campos e tente novamente.",
+      "pageCountBelowCurrent": "O total de páginas não pode ser menor que a página atual.",
       "duplicateIsbn": "Já existe um livro com esse ISBN.",
-      "notFound": "Este livro não foi encontrado.",
-      "pageCountBelowCurrent": "O total de páginas não pode ser menor que a página atual."
+      "notFound": "Este livro não foi encontrado."
     },
     "detail": {
       "eyebrow": "Na estante",
