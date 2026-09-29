@@ -142,8 +142,9 @@
   },
   "GreatWork": {
     "eyebrow": "Solve et Coagula",
-    "title": "The Great Work journey",
-    "overviewDescription": "Four moments to follow what each book awakens, changes, and leaves with you.",
+    "title": "The Great Work",
+    "overviewDescription": "The Great Work (Magnum Opus) is the alchemical process of transforming base matter into gold. In alchemy, this path symbolizes the transformation of the self: a passage from ignorance to knowledge, from fragmentation to unity. Its four stages — Nigredo, Albedo, Citrinitas, and Rubedo — trace a journey of death and rebirth, purification, illumination, and integration.",
+    "overviewReading": "In reading, these stages reflect an inner path of learning: letting go of old ideas, clarifying understanding, discovering new perspectives, and finally putting knowledge into practice and living it more fully.",
     "viewOverview": "Explore the Great Work journey",
     "step": "Stage {number}",
     "timeline": "Reading timeline",
@@ -153,10 +154,10 @@
       "assimilatedAt": "Assimilated"
     },
     "stages": {
-      "NIGREDO": { "name": "Nigredo", "subtitle": "Possibility", "description": "The book is still waiting to be encountered.", "alchemy": "matter breaks down so transformation can begin" },
-      "ALBEDO": { "name": "Albedo", "subtitle": "Reading in progress", "description": "Passages and impressions begin to take shape.", "alchemy": "matter is purified and begins to gain clarity" },
-      "CITRINITAS": { "name": "Citrinitas", "subtitle": "Post-reading reflection", "description": "The reading is finished; what remained can be gathered.", "alchemy": "light reveals an understanding taking shape" },
-      "RUBEDO": { "name": "Rubedo", "subtitle": "Assimilated work", "description": "What was read becomes part of your repertoire.", "alchemy": "the transformed parts come together and the work is completed" }
+      "NIGREDO": { "name": "Nigredo", "ordinal": "First stage", "subtitle": "Possibility", "description": "The book is still waiting to be encountered.", "alchemy": "Matter breaks down so transformation can begin.", "journeyDescription": "This is the encounter with the shadow. What once seemed solid dissolves, old structures break apart, and certainties are questioned. It is fertile chaos that makes room for something new." },
+      "ALBEDO": { "name": "Albedo", "ordinal": "Second stage", "subtitle": "Reading in progress", "description": "Passages and impressions begin to take shape.", "alchemy": "Matter is purified and begins to gain clarity.", "journeyDescription": "What was confused grows still. The mind becomes clearer, the senses more refined, and new ways of understanding emerge. This is a time to put things in order and build a solid foundation." },
+      "CITRINITAS": { "name": "Citrinitas", "ordinal": "Third stage", "subtitle": "Post-reading reflection", "description": "The reading is finished; what remained can be gathered.", "alchemy": "Light reveals an understanding that was taking shape.", "journeyDescription": "Knowledge matures and comes alive. New connections appear, ideas come together, and deeper understanding emerges. This is a time to see more clearly, connect what you know, and apply what you have learned." },
+      "RUBEDO": { "name": "Rubedo", "ordinal": "Fourth stage", "subtitle": "Assimilated work", "description": "What was read becomes part of your repertoire.", "alchemy": "The transformed parts unite and the work is complete.", "journeyDescription": "This is integration. Everything dissolved, purified, and illuminated takes on a new, fuller form. Knowledge finds expression in practice and becomes part of life." }
     },
     "current": {
       "NIGREDO": "This book is waiting to be read.",
@@ -165,9 +166,11 @@
       "RUBEDO": "This reading has been assimilated into your repertoire."
     },
     "abandoned": "This reading was interrupted and sits outside the four stages for now.",
-    "bookCount": "{count, plural, one {# book} other {# books}}",
+    "bookCount": "{count, plural, one {book} other {books}}",
+    "booksInStage": "Books in this stage",
     "browseStage": "Browse in library",
     "emptyStage": "No books at this stage yet.",
+    "emptyStagePrompt": "Keep going on your journey to reach this point.",
     "abandonedTitle": "Interrupted readings",
     "abandonedDescription": "Interrupted books remain in the library without being forced into a Great Work stage.",
     "databaseUnavailable": "The journey will appear once the database connection is configured."

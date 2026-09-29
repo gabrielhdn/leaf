@@ -142,8 +142,9 @@
   },
   "GreatWork": {
     "eyebrow": "Solve et Coagula",
-    "title": "A jornada Great Work",
-    "overviewDescription": "Quatro momentos para acompanhar o que cada leitura desperta, transforma e deixa em você.",
+    "title": "A Grande Obra",
+    "overviewDescription": "A Grande Obra (Magnum Opus) é o processo alquímico de transformação da matéria bruta em ouro. Na alquimia, esse caminho simboliza a transmutação do ser: a passagem da ignorância para o conhecimento, da fragmentação para a unidade. São quatro etapas — Nigredo, Albedo, Citrinitas e Rubedo — que representam uma jornada de morte e renascimento, purificação, iluminação e integração.",
+    "overviewReading": "Na leitura, essas etapas refletem um percurso interno de aprendizado: desconstruir velhas ideias, purificar o entendimento, revelar novas perspectivas e, por fim, integrar o conhecimento na prática, vivendo-o de forma mais completa.",
     "viewOverview": "Explorar a jornada Great Work",
     "step": "Etapa {number}",
     "timeline": "Linha do tempo da leitura",
@@ -153,10 +154,10 @@
       "assimilatedAt": "Assimilação"
     },
     "stages": {
-      "NIGREDO": { "name": "Nigredo", "subtitle": "Possibilidade", "description": "O livro ainda espera seu encontro com você.", "alchemy": "a matéria se desfaz para que a transformação possa começar" },
-      "ALBEDO": { "name": "Albedo", "subtitle": "Leitura em curso", "description": "Trechos e impressões começam a ganhar forma.", "alchemy": "a matéria é purificada e começa a ganhar clareza" },
-      "CITRINITAS": { "name": "Citrinitas", "subtitle": "Reflexão após a leitura", "description": "A leitura terminou; o que permaneceu pode ser reunido.", "alchemy": "a luz revela uma compreensão que estava se formando" },
-      "RUBEDO": { "name": "Rubedo", "subtitle": "Obra assimilada", "description": "O que foi lido passa a fazer parte do seu repertório.", "alchemy": "as partes transformadas se unem e a obra se completa" }
+      "NIGREDO": { "name": "Nigredo", "ordinal": "Primeira etapa", "subtitle": "Possibilidade", "description": "O livro ainda espera seu encontro com você.", "alchemy": "A matéria se desfaz para que a transformação possa começar.", "journeyDescription": "É o encontro com a sombra. Nesta etapa, o que era sólido se dissolve, velhas estruturas se rompem e certezas são questionadas. É o caos fértil que abre espaço para o novo." },
+      "ALBEDO": { "name": "Albedo", "ordinal": "Segunda etapa", "subtitle": "Leitura em curso", "description": "Trechos e impressões começam a ganhar forma.", "alchemy": "A matéria é purificada e começa a ganhar clareza.", "journeyDescription": "O que era confuso se aquieta. Nesta etapa, a mente se torna mais clara, os sentidos se refinam e novas formas de entendimento surgem. É o momento de ordenar, compreender e construir uma base sólida." },
+      "CITRINITAS": { "name": "Citrinitas", "ordinal": "Terceira etapa", "subtitle": "Reflexão após a leitura", "description": "A leitura terminou; o que permaneceu pode ser reunido.", "alchemy": "A luz revela uma compreensão que estava se formando.", "journeyDescription": "O conhecimento amadurece e ganha vida. Nesta etapa, novas conexões aparecem, ideias se integram e um entendimento mais profundo emerge. É o momento de ver com mais clareza, relacionar saberes e aplicar o que foi aprendido." },
+      "RUBEDO": { "name": "Rubedo", "ordinal": "Quarta etapa", "subtitle": "Obra assimilada", "description": "O que foi lido passa a fazer parte do seu repertório.", "alchemy": "As partes transformadas se unem e a obra se completa.", "journeyDescription": "É a integração. Tudo o que foi dissolvido, purificado e iluminado se une em uma nova forma, mais plena e consciente. Nesta etapa, o conhecimento se manifesta na prática e passa a fazer parte da vida." }
     },
     "current": {
       "NIGREDO": "Este livro está à espera de ser lido.",
@@ -165,9 +166,11 @@
       "RUBEDO": "Esta leitura foi assimilada e agora faz parte do seu repertório."
     },
     "abandoned": "Esta leitura foi interrompida e está fora das quatro etapas por enquanto.",
-    "bookCount": "{count, plural, one {# livro} other {# livros}}",
+    "bookCount": "{count, plural, one {livro} other {livros}}",
+    "booksInStage": "Livros nesta etapa",
     "browseStage": "Ver na biblioteca",
     "emptyStage": "Nenhum livro nesta etapa ainda.",
+    "emptyStagePrompt": "Continue sua jornada para chegar até aqui.",
     "abandonedTitle": "Leituras interrompidas",
     "abandonedDescription": "Livros interrompidos permanecem na biblioteca sem serem forçados a uma etapa da Great Work.",
     "databaseUnavailable": "A jornada aparecerá quando a conexão com o banco de dados for configurada."
