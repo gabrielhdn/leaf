@@ -5,6 +5,7 @@ import { getPathname, Link } from "@/i18n/navigation";
 import { isOwner } from "@/lib/auth/owner-session";
 import { LocaleSwitcher } from "./locale-switcher";
 import { MobileMenu } from "./mobile-menu";
+import { SiteNav } from "./site-nav";
 import { ThemeSwitcher } from "./theme-switcher";
 
 export async function SiteHeader() {
@@ -53,13 +54,7 @@ export async function SiteHeader() {
         </div>
         <MobileMenu canAddBook={canAddBook} />
       </div>
-      <nav aria-label={t("navigation")} className="mx-auto hidden max-w-7xl items-center gap-6 border-t border-border/70 px-5 py-3 text-sm font-medium whitespace-nowrap sm:px-8 lg:flex lg:px-12">
-        <Link href="/" className="text-muted-foreground transition-colors hover:text-foreground">{t("library")}</Link>
-        <Link href="/reading" className="text-muted-foreground transition-colors hover:text-foreground">{t("reading")}</Link>
-        <Link href="/wishlist" className="text-muted-foreground transition-colors hover:text-foreground">{t("wishlist")}</Link>
-        <Link href="/quotes" className="text-muted-foreground transition-colors hover:text-foreground">{t("quotes")}</Link>
-        <Link href="/great-work" className="text-muted-foreground transition-colors hover:text-foreground">{t("greatWork")}</Link>
-      </nav>
+      <SiteNav />
     </header>
   );
 }

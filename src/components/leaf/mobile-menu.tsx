@@ -86,9 +86,9 @@ export function MobileMenu({ canAddBook }: { canAddBook: boolean }) {
               <Link
                 key={href}
                 href={href}
-                aria-current={pathname === href ? "page" : undefined}
+                aria-current={pathname === href || (href === "/" && pathname.startsWith("/books/")) ? "page" : undefined}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted aria-[current=page]:bg-muted aria-[current=page]:text-brand"
+                className="rounded-lg border border-transparent px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted aria-[current=page]:border-border aria-[current=page]:bg-muted aria-[current=page]:text-brand"
               >
                 {label}
               </Link>
