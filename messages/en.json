@@ -106,7 +106,25 @@
       "invalid": "Check the fields and try again.",
       "pageCountBelowCurrent": "The total page count cannot be less than the current page.",
       "duplicateIsbn": "A book with this ISBN already exists.",
-      "notFound": "This book was not found."
+      "notFound": "This book was not found.",
+      "currentPage": "Current page",
+      "coverPreview": "Book cover",
+      "rate": "Rate {value} stars",
+      "cancel": "Cancel",
+      "close": "Close form",
+      "loading": "Loading book…",
+      "loadError": "The form could not be loaded. Close it and try again.",
+      "drawerDescription": "Organize book details and track your reading.",
+      "sections": {
+        "main": "Main information",
+        "mainDescription": "Basic information about the book.",
+        "organization": "Classification and organization",
+        "organizationDescription": "How the book fits into your library.",
+        "metadata": "Edition details",
+        "metadataDescription": "Information to identify this edition.",
+        "progress": "Progress and status",
+        "progressDescription": "Your reading and your relationship with the book."
+      }
     },
     "detail": {
       "eyebrow": "On the shelf",
@@ -123,6 +141,43 @@
       "delete": "Delete",
       "deleteConfirm": "Delete this book and all its reading records?"
     }
+  },
+  "Authors": {
+    "title": "Authors",
+    "placeholder": "Search or write an author",
+    "filterPlaceholder": "Search authors",
+    "add": "Add author",
+    "remove": "Remove author {name}",
+    "createOnSave": "Write an author and use + or Enter to add them.",
+    "noMatches": "No authors found.",
+    "help": "Select an existing author or write a new one. Use Enter or + to add several; new names are created when you save the book.",
+    "loadError": "Authors could not be loaded. Try again."
+  },
+  "Categories": {
+    "title": "Categories",
+    "placeholder": "Search or write a category",
+    "filterPlaceholder": "Search categories",
+    "add": "Add category",
+    "remove": "Remove category {name}",
+    "createOnSave": "Write a category and use + or Enter to add it.",
+    "noMatches": "No categories found.",
+    "help": "Write and save the book to create a category. Use Enter or + to add several. Up to 20 per book.",
+    "filterHelp": "Shows books with at least one selected category.",
+    "loadError": "Categories could not be loaded. Try again.",
+    "manage": "Manage categories",
+    "rename": "Rename category {name}",
+    "save": "Save name",
+    "delete": "Delete category {name}",
+    "confirmDelete": "Delete category",
+    "cancel": "Cancel",
+    "deleteHelp": "The category will be removed from all books. The books will be kept.",
+    "manageHelp": "Edit a name and save with ✓. Search to find other categories; up to 10 are shown at a time.",
+    "search": "Search categories to manage",
+    "bookCount": "{count, plural, =0 {No books} one {# book} other {# books}}",
+    "invalid": "Enter a valid category name of up to 100 characters.",
+    "duplicate": "A category with this name already exists.",
+    "notFound": "This category was not found.",
+    "saveError": "The change could not be saved. Try again."
   },
   "ReadingEntries": {
     "quote": {

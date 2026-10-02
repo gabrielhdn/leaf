@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { BookCover } from "@/components/leaf/book-cover";
+import { BookDrawerTrigger } from "@/components/leaf/book-drawer";
 import { Link } from "@/i18n/navigation";
 import { isOwner } from "@/lib/auth/owner-session";
 import { getBook } from "@/lib/books";
@@ -35,6 +36,7 @@ export default async function BookPage({ params }: { params: Promise<{ locale: s
           <h1 className="mt-4 font-heading text-5xl font-medium leading-none text-brand sm:text-7xl">{book.title}</h1>
           <p className="mt-4 text-lg text-muted-foreground">{book.authors.map(({ author }) => author.name).join(", ")}</p>
           <div className="mt-7 flex flex-wrap gap-2 text-sm">
+            {book.categories.map(({ category }) => <Link key={category.id} href={{ pathname: "/", query: { categories: category.name }, hash: "library" }} className="rounded-full border border-border bg-secondary px-3 py-1 transition-opacity hover:opacity-80">{category.name}</Link>)}
             <span className="rounded-full border border-border bg-card px-3 py-1">{t(`form.${book.ownershipStatus === "OWNED" ? "owned" : "wishlist"}`)}</span>
             <span className="rounded-full border border-border bg-card px-3 py-1">{t(`form.${({ WANT_TO_READ: "wantToRead", READING: "readingNow", READ: "read", ABANDONED: "abandoned" } as const)[book.readingStatus]}`)}</span>
           </div>
@@ -50,7 +52,7 @@ export default async function BookPage({ params }: { params: Promise<{ locale: s
           {book.description && <section className="mt-10 border-t border-border pt-7"><h2 className="font-heading text-3xl text-brand">{t("detail.description")}</h2><p className="mt-3 whitespace-pre-wrap leading-8 text-muted-foreground">{book.description}</p></section>}
           {owner && <BookStatusForm id={id} locale={locale} ownershipStatus={book.ownershipStatus} readingStatus={book.readingStatus} currentPage={book.currentPage} pageCount={book.pageCount} />}
           {owner && <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-border pt-7">
-            <Link href={`/books/${id}/edit`} className="inline-flex h-8 items-center rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground hover:bg-primary/80">{t("detail.edit")}</Link>
+            <BookDrawerTrigger bookId={id} className="inline-flex h-8 items-center rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground hover:bg-primary/80">{t("detail.edit")}</BookDrawerTrigger>
             <form action={deleteBook}><input type="hidden" name="id" value={id} /><input type="hidden" name="locale" value={locale} /><DeleteButton /></form>
           </div>}
         </div>

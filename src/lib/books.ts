@@ -2,6 +2,7 @@ import "server-only";
 import type { Prisma } from "@/generated/prisma/client";
 import { getDb } from "@/lib/db";
 import type { BookInput } from "@/domain/book-input";
+import { categoryKey } from "@/domain/categories";
 import { PageCountBelowCurrentPageError } from "@/domain/reading-progress";
 import { changeReadingStatus, type GreatWorkStage, type ReadingJourney } from "@/domain/reading-journey";
 
@@ -10,6 +11,7 @@ export type BookFilter = {
   ownership?: "OWNED" | "WISHLIST";
   reading?: "WANT_TO_READ" | "READING" | "READ" | "ABANDONED";
   stage?: GreatWorkStage;
+  categories?: string[];
 };
 
 function stageWhere(stage: GreatWorkStage): Prisma.BookWhereInput {
@@ -23,6 +25,7 @@ function stageWhere(stage: GreatWorkStage): Prisma.BookWhereInput {
 
 const bookInclude = {
   authors: { include: { author: true } },
+  categories: { include: { category: true } },
 } satisfies Prisma.BookInclude;
 
 export async function listBooks(filter: BookFilter = {}) {
@@ -30,6 +33,9 @@ export async function listBooks(filter: BookFilter = {}) {
   const where: Prisma.BookWhereInput = {
     ownershipStatus: filter.ownership,
     readingStatus: filter.reading,
+    categories: filter.categories?.length
+      ? { some: { category: { key: { in: filter.categories.map(categoryKey) } } } }
+      : undefined,
     AND: filter.stage ? [stageWhere(filter.stage)] : undefined,
     OR: filter.search
       ? [
@@ -47,12 +53,12 @@ export async function getBook(id: string) {
 }
 
 async function authorRelations(tx: Prisma.TransactionClient, names: string[]) {
-  const uniqueNames = [...new Set(names)];
+  const uniqueNames = [...new Map(names.map((name) => [name.toLocaleLowerCase("pt"), name])).values()];
   const relations: { author: { connect: { id: string } } }[] = [];
 
   for (const name of uniqueNames) {
     const author =
-      (await tx.author.findFirst({ where: { name } })) ??
+      (await tx.author.findFirst({ where: { name: { equals: name, mode: "insensitive" } } })) ??
       (await tx.author.create({ data: { name } }));
     relations.push({ author: { connect: { id: author.id } } });
   }
@@ -66,10 +72,17 @@ export async function saveBook(input: BookInput, id?: string) {
   return db.$transaction(async (tx) => {
     const current = id ? await tx.book.findUnique({ where: { id } }) : null;
     if (id && !current) return null;
-    if (current && current.currentPage !== null && input.pageCount !== undefined && current.currentPage > input.pageCount) {
+    const currentPage = input.currentPage === undefined ? current?.currentPage ?? null : input.currentPage;
+    if (currentPage !== null && input.pageCount !== undefined && currentPage > input.pageCount) {
       throw new PageCountBelowCurrentPageError();
     }
     const authors = await authorRelations(tx, input.authors);
+    const categories: { category: { connect: { id: string } } }[] = [];
+    const names = new Map(input.categories.map((name) => [categoryKey(name), name]));
+    for (const [key, name] of names) {
+      const category = await tx.category.upsert({ where: { key }, update: {}, create: { name, key } });
+      categories.push({ category: { connect: { id: category.id } } });
+    }
 
     const journey: ReadingJourney = current ?? {
       readingStatus: "WANT_TO_READ",
@@ -85,6 +98,7 @@ export async function saveBook(input: BookInput, id?: string) {
       isbn: input.isbn ?? null,
       publicationYear: input.publicationYear ?? null,
       pageCount: input.pageCount ?? null,
+      currentPage,
       ownershipStatus: input.ownershipStatus,
       rating: input.rating ?? null,
       ...status,
@@ -93,10 +107,10 @@ export async function saveBook(input: BookInput, id?: string) {
     if (id) {
       return tx.book.update({
         where: { id },
-        data: { ...data, authors: { deleteMany: {}, create: authors } },
+        data: { ...data, authors: { deleteMany: {}, create: authors }, categories: { deleteMany: {}, create: categories } },
       });
     }
 
-    return tx.book.create({ data: { ...data, authors: { create: authors } } });
+    return tx.book.create({ data: { ...data, authors: { create: authors }, categories: { create: categories } } });
   });
 }

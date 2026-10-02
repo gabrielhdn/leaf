@@ -4,7 +4,7 @@ import { Prisma } from "@/generated/prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { hasLocale } from "next-intl";
-import { bookInputSchema, parseBookForm } from "@/domain/book-input";
+import { bookInputSchema, parseBookForm, type BookInput } from "@/domain/book-input";
 import { PageCountBelowCurrentPageError, parseCurrentPage } from "@/domain/reading-progress";
 import { changeReadingStatus } from "@/domain/reading-journey";
 import { getPathname } from "@/i18n/navigation";
@@ -15,6 +15,7 @@ import { saveBook } from "@/lib/books";
 
 export type BookFormState = {
   error: "invalid" | "duplicateIsbn" | "notFound" | "pageCountBelowCurrent" | null;
+  savedId?: string;
 };
 
 export type BookStatusFormState = {
@@ -60,7 +61,33 @@ export async function submitBook(
 
   const locale = localeFromForm(formData);
   revalidateLibraryViews(locale);
-  redirect(getPathname({ href: `/books/${book.id}`, locale }));
+  revalidatePath(getPathname({ href: `/books/${book.id}`, locale }));
+  return { error: null, savedId: book.id };
+}
+
+export async function loadBookEditor(id?: string): Promise<{ id?: string; initial?: BookInput } | null> {
+  await requireOwner();
+  if (!id) return {};
+  if (!/^[0-9a-f-]{36}$/i.test(id)) return null;
+  const book = await getDb().book.findUnique({ where: { id }, include: {
+    authors: { include: { author: true } },
+    categories: { include: { category: true } },
+  } });
+  if (!book) return null;
+  return { id, initial: {
+    title: book.title,
+    authors: book.authors.map(({ author }) => author.name),
+    categories: book.categories.map(({ category }) => category.name),
+    description: book.description ?? undefined,
+    coverUrl: book.coverUrl ?? undefined,
+    isbn: book.isbn ?? undefined,
+    publicationYear: book.publicationYear ?? undefined,
+    pageCount: book.pageCount ?? undefined,
+    currentPage: book.currentPage,
+    ownershipStatus: book.ownershipStatus,
+    readingStatus: book.readingStatus,
+    rating: book.rating,
+  } };
 }
 
 export async function updateBookStatus(_previous: BookStatusFormState, formData: FormData): Promise<BookStatusFormState> {

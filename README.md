@@ -8,7 +8,7 @@ A jornada de leitura combina estados familiares — quero ler, lendo e lido — 
 
 ## Escopo inicial
 
-- Cadastro de livros com múltiplos autores, dados bibliográficos, capa e estados independentes de posse e leitura.
+- Cadastro e edição de livros em um drawer, com múltiplos autores e categorias, dados bibliográficos, capa e estados independentes de posse e leitura.
 - Biblioteca, lista de desejos e coleção de citações com busca e filtros.
 - Notas e citações por livro, com destaque para citações favoritas.
 - Reflexão final, ideias principais, avaliação e histórico da jornada de leitura.
@@ -67,6 +67,14 @@ O esquema Prisma e a migração inicial estão em `prisma/`. O `.env` local é i
 Em Production na Vercel, configure as mesmas **chaves** de ambiente com valores próprios de produção: `DATABASE_URL` com a conexão pooled do Neon, `DIRECT_URL` com a conexão direta do Neon, `AUTH_SECRET`, `AUTH_TRUST_HOST=true` e `LEAF_OWNER_PASSWORD`. Não copie URLs do Neon para o `.env` de desenvolvimento. Execute `npm run db:deploy` para produção separadamente, em um ambiente que tenha `DIRECT_URL` do Neon; o comando mostrado em desenvolvimento aplica a migração apenas ao PostgreSQL local.
 
 Os arquivos de código do Prisma Client são gerados automaticamente após `npm install`.
+
+## Autores e categorias
+
+O campo de autores sugere até dez nomes já cadastrados conforme a busca. Selecione um ou mais autores, ou escreva um nome novo para criá-lo ao salvar o livro.
+
+Um livro pode ter várias categorias. No formulário, procure uma categoria existente ou escreva um nome novo e salve o livro; Enter ou `+` permitem adicionar mais categorias antes de salvar. As sugestões mostram até dez opções correspondentes à busca.
+
+Use **Gerenciar categorias**, na seção de classificação do drawer, para renomear ou excluir uma categoria. Excluir uma categoria remove suas associações com os livros e mantém os livros. Nos filtros da biblioteca, selecionar várias categorias mostra livros com pelo menos uma delas.
 
 ## Estado do projeto
 

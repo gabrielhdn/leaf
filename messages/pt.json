@@ -72,7 +72,7 @@
       "reading": "Leitura",
       "allOwnership": "Todos os livros",
       "allReading": "Todos os estados",
-      "stage": "Etapa Great Work",
+      "stage": "Great Work",
       "allStages": "Todas as etapas",
       "apply": "Filtrar",
       "moreFilters": "Expandir filtros",
@@ -106,7 +106,25 @@
       "invalid": "Confira os campos e tente novamente.",
       "pageCountBelowCurrent": "O total de páginas não pode ser menor que a página atual.",
       "duplicateIsbn": "Já existe um livro com esse ISBN.",
-      "notFound": "Este livro não foi encontrado."
+      "notFound": "Este livro não foi encontrado.",
+      "currentPage": "Página atual",
+      "coverPreview": "Capa do livro",
+      "rate": "Avaliar com {value} estrelas",
+      "cancel": "Cancelar",
+      "close": "Fechar formulário",
+      "loading": "Carregando livro…",
+      "loadError": "Não foi possível carregar o formulário. Feche e tente novamente.",
+      "drawerDescription": "Organize os dados do livro e acompanhe sua leitura.",
+      "sections": {
+        "main": "Informações principais",
+        "mainDescription": "Dados básicos sobre o livro.",
+        "organization": "Classificação e organização",
+        "organizationDescription": "Como o livro se encaixa na sua biblioteca.",
+        "metadata": "Detalhes da edição",
+        "metadataDescription": "Informações para identificar esta edição.",
+        "progress": "Progresso e estado",
+        "progressDescription": "Sua leitura e sua relação com o livro."
+      }
     },
     "detail": {
       "eyebrow": "Na estante",
@@ -123,6 +141,43 @@
       "delete": "Excluir",
       "deleteConfirm": "Excluir este livro e todos os registros de leitura associados?"
     }
+  },
+  "Authors": {
+    "title": "Autores",
+    "placeholder": "Busque ou escreva um autor",
+    "filterPlaceholder": "Buscar autores",
+    "add": "Adicionar autor",
+    "remove": "Remover autor {name}",
+    "createOnSave": "Escreva um autor e use + ou Enter para adicioná-lo.",
+    "noMatches": "Nenhum autor encontrado.",
+    "help": "Selecione um autor existente ou escreva um novo. Use Enter ou + para adicionar vários; novos nomes são criados ao salvar o livro.",
+    "loadError": "Não foi possível carregar os autores. Tente novamente."
+  },
+  "Categories": {
+    "title": "Categorias",
+    "placeholder": "Busque ou escreva uma categoria",
+    "filterPlaceholder": "Buscar categorias",
+    "add": "Adicionar categoria",
+    "remove": "Remover categoria {name}",
+    "createOnSave": "Escreva uma categoria e use + ou Enter para adicioná-la.",
+    "noMatches": "Nenhuma categoria encontrada.",
+    "help": "Escreva e salve o livro para criar uma categoria. Use Enter ou + para adicionar várias. Até 20 por livro.",
+    "filterHelp": "Mostra livros com pelo menos uma das categorias selecionadas.",
+    "loadError": "Não foi possível carregar as categorias. Tente novamente.",
+    "manage": "Gerenciar categorias",
+    "rename": "Renomear categoria {name}",
+    "save": "Salvar nome",
+    "delete": "Excluir categoria {name}",
+    "confirmDelete": "Excluir categoria",
+    "cancel": "Cancelar",
+    "deleteHelp": "A categoria será removida de todos os livros. Os livros serão mantidos.",
+    "manageHelp": "Edite um nome e salve com ✓. Use a busca para encontrar outras categorias; são mostradas até 10 por vez.",
+    "search": "Buscar categoria para gerenciar",
+    "bookCount": "{count, plural, =0 {Nenhum livro} one {# livro} other {# livros}}",
+    "invalid": "Digite um nome de categoria válido, com até 100 caracteres.",
+    "duplicate": "Já existe uma categoria com esse nome.",
+    "notFound": "Esta categoria não foi encontrada.",
+    "saveError": "Não foi possível salvar a alteração. Tente novamente."
   },
   "ReadingEntries": {
     "quote": {

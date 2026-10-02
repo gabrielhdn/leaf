@@ -2,7 +2,9 @@
 
 import { BookOpen, Check, ChevronDown, Eclipse, Flame, Heart, Layers, LibraryBig, Moon, Pause, Search, Sun, type LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 import type { BookFilter } from "@/lib/books";
+import { CategoryPicker } from "./category-picker";
 import { useAnimatedDisclosure } from "./use-animated-disclosure";
 
 type FilterOption = {
@@ -40,7 +42,9 @@ function FilterGroup({ name, legend, value, options, hideLegend = false }: {
 export function LibraryFilters({ search, filter }: { search: string; filter: BookFilter }) {
   const t = useTranslations("Books");
   const greatT = useTranslations("GreatWork");
+  const categoryT = useTranslations("Categories");
   const { open: expanded, panelRef, toggle } = useAnimatedDisclosure();
+  const [categories, setCategories] = useState(filter.categories ?? []);
 
   return (
     <form method="get" className="mt-8 grid content-start items-center gap-x-3 overflow-hidden rounded-xl border border-border bg-card p-4 sm:p-5 lg:grid-cols-[minmax(0,1fr)_auto_auto]">
@@ -64,6 +68,7 @@ export function LibraryFilters({ search, filter }: { search: string; filter: Boo
       >
         <div className="min-h-0 overflow-hidden">
           <div className="grid gap-5 pt-5">
+            <fieldset className="space-y-2"><legend className="text-sm font-medium">{categoryT("title")}</legend><CategoryPicker value={categories} onChange={setCategories} allowCreate={false} /><p className="text-xs text-muted-foreground">{categoryT("filterHelp")}</p></fieldset>
             <FilterGroup name="reading" legend={t("filters.reading")} value={filter.reading ?? ""} options={[
               { value: "", label: t("filters.allReading"), icon: Layers },
               { value: "WANT_TO_READ", label: t("form.wantToRead"), icon: BookOpen, iconClass: "text-warm-accent" },

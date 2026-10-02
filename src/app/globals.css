@@ -163,8 +163,29 @@
   pointer-events: auto;
 }
 
+.book-drawer-backdrop {
+  transition: opacity 300ms ease;
+}
+
+.book-drawer-backdrop[data-starting-style],
+.book-drawer-backdrop[data-ending-style] {
+  opacity: 0;
+}
+
+.book-drawer-panel {
+  transition: transform 300ms ease, opacity 300ms ease;
+}
+
+.book-drawer-panel[data-starting-style],
+.book-drawer-panel[data-ending-style] {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .mobile-menu-panel {
+  .mobile-menu-panel,
+  .book-drawer-panel,
+  .book-drawer-backdrop {
     transition: none;
   }
 }

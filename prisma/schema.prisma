@@ -37,12 +37,32 @@ model Book {
   createdAt       DateTime           @default(now()) @db.Timestamptz(3)
   updatedAt       DateTime           @updatedAt @db.Timestamptz(3)
   authors         BookAuthor[]
+  categories      BookCategory[]
   quotes          Quote[]
   notes           BookNote[]
   reflection      ReadingReflection?
 
   @@index([ownershipStatus, readingStatus])
   @@index([createdAt])
+}
+
+model Category {
+  id        String         @id @default(uuid()) @db.Uuid
+  name      String
+  key       String         @unique
+  books     BookCategory[]
+  createdAt DateTime       @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime       @updatedAt @db.Timestamptz(3)
+}
+
+model BookCategory {
+  bookId     String   @db.Uuid
+  categoryId String   @db.Uuid
+  book       Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([bookId, categoryId])
+  @@index([categoryId])
 }
 
 model Author {

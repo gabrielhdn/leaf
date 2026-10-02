@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { getPathname, Link, usePathname } from "@/i18n/navigation";
 import { LocaleSwitcher } from "./locale-switcher";
 import { ThemeSwitcher } from "./theme-switcher";
+import { BookDrawerTrigger } from "./book-drawer";
 
 export function MobileMenu({ canAddBook }: { canAddBook: boolean }) {
   const t = useTranslations("Navigation");
@@ -97,7 +98,7 @@ export function MobileMenu({ canAddBook }: { canAddBook: boolean }) {
 
           <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-4">
             <div className="flex flex-wrap items-center gap-4">
-              {canAddBook && <Link href="/books/new" onClick={() => setOpen(false)} className="inline-flex items-center gap-1 text-sm font-medium text-brand transition-opacity duration-200 hover:opacity-80"><Plus className="size-4" aria-hidden="true" />{t("addBook")}</Link>}
+              {canAddBook && <BookDrawerTrigger onClick={() => setOpen(false)} className="inline-flex items-center gap-1 text-sm font-medium text-brand transition-opacity duration-200 hover:opacity-80"><Plus className="size-4" aria-hidden="true" />{t("addBook")}</BookDrawerTrigger>}
               <Link href="/login" onClick={() => setOpen(false)} className="text-sm font-medium text-muted-foreground hover:text-foreground">{t("access")}</Link>
             </div>
             <div className="flex items-center gap-3">

@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { BookCard } from "@/components/leaf/book-card";
 import { HomeDashboard } from "@/components/leaf/home-dashboard";
 import { LibraryFilters } from "@/components/leaf/library-filters";
+import { BookDrawerTrigger } from "@/components/leaf/book-drawer";
 import { greatWorkStages } from "@/domain/reading-journey";
 import { Link } from "@/i18n/navigation";
 import { isOwner } from "@/lib/auth/owner-session";
@@ -25,6 +26,9 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
   const ownershipValue = value(params, "ownership");
   const readingValue = value(params, "reading");
   const stageValue = value(params, "stage");
+  const categoriesValue = params.categories;
+  const categories = (Array.isArray(categoriesValue) ? categoriesValue : categoriesValue ? [categoriesValue] : [])
+    .filter((category) => category.trim() && category.length <= 100).slice(0, 20);
   const filter: BookFilter = {
     search: search || undefined,
     ownership: ownershipValue === "OWNED" || ownershipValue === "WISHLIST" ? ownershipValue : undefined,
@@ -32,8 +36,9 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
       ? readingValue as BookFilter["reading"]
       : undefined,
     stage: greatWorkStages.find((stage) => stage === stageValue),
+    categories: categories.length ? categories : undefined,
   };
-  const hasFilter = Boolean(filter.search || filter.ownership || filter.reading || filter.stage);
+  const hasFilter = Boolean(filter.search || filter.ownership || filter.reading || filter.stage || filter.categories?.length);
   const databaseReady = Boolean(process.env.DATABASE_URL);
   const [allBooks, owner] = await Promise.all([
     databaseReady ? listBooks() : Promise.resolve([]),
@@ -73,7 +78,7 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
             </div>
             <h2 id="shelf-title" className="mt-5 font-heading text-4xl font-medium leading-none tracking-tight text-brand sm:text-5xl">{t(allBooks.length ? "shelfTitlePopulated" : "shelfTitle")}</h2>
           </div>
-          {owner && databaseReady && <Link href="/books/new" className="inline-flex h-9 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/80"><Plus className="size-4" aria-hidden="true" />{booksT("add")}</Link>}
+          {owner && databaseReady && <BookDrawerTrigger className="inline-flex h-9 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/80"><Plus className="size-4" aria-hidden="true" />{booksT("add")}</BookDrawerTrigger>}
         </div>
 
         {databaseReady && <LibraryFilters search={search} filter={filter} />}

@@ -7,6 +7,7 @@ import { LocaleSwitcher } from "./locale-switcher";
 import { MobileMenu } from "./mobile-menu";
 import { SiteNav } from "./site-nav";
 import { ThemeSwitcher } from "./theme-switcher";
+import { BookDrawerTrigger } from "./book-drawer";
 
 export async function SiteHeader() {
   const t = await getTranslations("Navigation");
@@ -39,7 +40,7 @@ export async function SiteHeader() {
             <input id="global-search" name="q" type="search" maxLength={100} placeholder={t("search")} className="h-9 w-36 bg-transparent px-3 text-sm outline-none lg:w-48" />
             <button type="submit" aria-label={t("search")} className="flex size-9 items-center justify-center text-muted-foreground hover:text-foreground"><Search className="size-4" aria-hidden="true" /></button>
           </form>
-          {canAddBook && <Link href="/books/new" className="inline-flex items-center gap-1 text-sm font-medium text-brand transition-opacity duration-200 hover:opacity-80"><Plus className="size-4" aria-hidden="true" />{t("addBook")}</Link>}
+          {canAddBook && <BookDrawerTrigger className="inline-flex items-center gap-1 text-sm font-medium text-brand transition-opacity duration-200 hover:opacity-80"><Plus className="size-4" aria-hidden="true" />{t("addBook")}</BookDrawerTrigger>}
           <Link href="/login" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">{t("access")}</Link>
           <LocaleSwitcher />
           <ThemeSwitcher />

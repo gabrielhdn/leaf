@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/leaf/site-header";
 import { ThemeProvider } from "@/components/leaf/theme-provider";
+import { BookDrawerProvider } from "@/components/leaf/book-drawer";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
@@ -41,8 +42,10 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body className="min-h-screen">
         <NextIntlClientProvider>
           <ThemeProvider>
-            <SiteHeader />
-            {children}
+            <BookDrawerProvider>
+              <SiteHeader />
+              {children}
+            </BookDrawerProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

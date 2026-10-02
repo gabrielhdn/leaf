@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { readingStatuses } from "./reading-journey";
+import { categoryNameSchema } from "./categories";
 
 const nonBlankText = (max: number) =>
   z
@@ -15,6 +16,8 @@ export const bookInputSchema = z.object({
   isbn: z.string().max(32).optional(),
   publicationYear: z.number().int().min(1450).max(3000).optional(),
   pageCount: z.number().int().positive().optional(),
+  currentPage: z.number().int().nonnegative().nullable().optional(),
+  categories: z.array(categoryNameSchema).max(20).default([]),
   ownershipStatus: z.enum(["OWNED", "WISHLIST"]),
   readingStatus: z.enum(readingStatuses),
   rating: z.number().int().min(1).max(5).nullable().optional(),
@@ -32,19 +35,20 @@ function optionalNumber(value: FormDataEntryValue | null): number | undefined {
 }
 
 export function parseBookForm(formData: FormData) {
-  const authors = formData.get("authors");
+  const authors = formData.getAll("authors");
 
   return bookInputSchema.safeParse({
     title: formData.get("title"),
-    authors:
-      typeof authors === "string"
-        ? authors.split("\n").map((author) => author.replace(/\r$/, "")).filter((author) => author.trim())
-        : [],
+    authors: authors.flatMap<FormDataEntryValue>((author) => typeof author === "string"
+      ? author.split("\n").map((name) => name.replace(/\r$/, "")).filter((name) => name.trim())
+      : [author]),
     description: optionalText(formData.get("description")),
     coverUrl: optionalText(formData.get("coverUrl")),
     isbn: optionalText(formData.get("isbn")),
     publicationYear: optionalNumber(formData.get("publicationYear")),
     pageCount: optionalNumber(formData.get("pageCount")),
+    currentPage: optionalNumber(formData.get("currentPage")) ?? null,
+    categories: formData.getAll("categories"),
     ownershipStatus: formData.get("ownershipStatus"),
     readingStatus: formData.get("readingStatus"),
     rating: optionalNumber(formData.get("rating")) ?? null,
