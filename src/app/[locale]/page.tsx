@@ -44,9 +44,8 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
 
   return (
     <main className="mx-auto w-full max-w-7xl px-5 pb-20 pt-12 sm:px-8 lg:px-12">
-      <section className="relative isolate min-h-[23rem] overflow-hidden pb-8 sm:min-h-[24rem] sm:pb-10">
-        <div aria-hidden="true" className="home-hero-art pointer-events-none absolute inset-0 -z-20" />
-        <div aria-hidden="true" className="home-hero-fade pointer-events-none absolute inset-0 -z-10" />
+      <section className="relative isolate sm:min-h-[24rem] sm:overflow-hidden sm:pb-10">
+        <div aria-hidden="true" className="home-hero-fade pointer-events-none absolute inset-0 -z-10 hidden sm:block" />
         <div className="relative max-w-4xl pt-3 sm:pt-7">
           <p className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
             <span className="h-px w-9 bg-warm-accent" aria-hidden="true" />
@@ -62,6 +61,7 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
             {t("motto")}
           </p>
         </div>
+        <div aria-hidden="true" className="home-hero-art pointer-events-none relative mt-4 aspect-[5/2] overflow-hidden rounded-xl sm:absolute sm:inset-0 sm:-z-20 sm:mt-0 sm:aspect-auto sm:rounded-none" />
       </section>
 
       {databaseReady && <HomeDashboard books={allBooks} />}
@@ -106,7 +106,7 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
           {books.map((book) => <BookCard key={book.id} book={book} label={book.ownershipStatus === "WISHLIST" ? booksT("form.wishlist") : booksT(`form.${({ WANT_TO_READ: "wantToRead", READING: "readingNow", READ: "read", ABANDONED: "abandoned" } as const)[book.readingStatus]}`)} />)}
         </div> : <div className="mt-8 rounded-2xl border border-border bg-card px-6 py-10 sm:px-10">
           <p className="max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">{!databaseReady ? booksT("databaseUnavailable") : hasFilter ? booksT("noResults") : t("shelfDescription")}</p>
-          {hasFilter && <Link href="/" className="mt-4 inline-block text-sm text-brand underline decoration-warm-accent underline-offset-4">{booksT("filters.clear")}</Link>}
+          {hasFilter && <Link href="/" className="mt-4 inline-block text-sm text-brand transition-opacity duration-200 hover:opacity-80">{booksT("filters.clear")}</Link>}
         </div>}
       </section>
     </main>

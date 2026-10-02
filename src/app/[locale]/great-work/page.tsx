@@ -62,7 +62,7 @@ export default async function GreatWorkPage() {
               <div className="min-w-0 border-t border-[var(--stage-divider)] pt-3 lg:border-t-0 lg:pl-6 lg:pt-0">
                 <div className="flex items-baseline justify-between gap-3">
                   <h3 className="font-heading text-xl font-semibold leading-none">{t("booksInStage")}</h3>
-                  <Link href={stageLink} className="shrink-0 text-sm font-medium text-[var(--stage-accent)] underline-offset-4 hover:underline">
+                  <Link href={stageLink} className="shrink-0 text-sm font-medium text-[var(--stage-accent)] transition-opacity duration-200 hover:opacity-80">
                     {t("browseStage")} ({group.length})
                   </Link>
                 </div>
@@ -71,8 +71,8 @@ export default async function GreatWorkPage() {
                     <div className="grid min-w-0 grid-cols-3 gap-3">
                       {group.slice(0, 3).map((book) => (
                         <Link key={book.id} href={`/books/${book.id}`} className="group min-w-0 text-center">
-                          <BookCover title={book.title} coverUrl={book.coverUrl} className="mx-auto w-full max-w-20 shadow-sm transition-transform group-hover:-translate-y-1" />
-                          <p className="mt-1 line-clamp-2 font-heading text-base font-semibold leading-4 group-hover:underline">{book.title}</p>
+                          <BookCover title={book.title} coverUrl={book.coverUrl} className="mx-auto w-full max-w-20 shadow-sm transition-opacity duration-200 group-hover:opacity-95" />
+                          <p className="mt-1 line-clamp-2 font-heading text-base font-semibold leading-4 transition-opacity duration-200 group-hover:opacity-80">{book.title}</p>
                           <p className="mt-0.5 line-clamp-1 text-xs leading-4 text-[var(--stage-muted)]">{book.authors.map(({ author }) => author.name).join(", ")}</p>
                         </Link>
                       ))}

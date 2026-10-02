@@ -27,7 +27,7 @@ export default async function BookPage({ params }: { params: Promise<{ locale: s
 
   return (
     <main className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-8 lg:px-12 lg:py-16">
-      <Link href="/" className="text-sm text-muted-foreground underline decoration-warm-accent underline-offset-4 hover:text-foreground">{t("detail.back")}</Link>
+      <Link href="/" className="text-sm text-muted-foreground transition-[color,opacity] duration-200 hover:opacity-80 hover:text-foreground">{t("detail.back")}</Link>
       <div className="mt-8 grid gap-10 md:grid-cols-[minmax(180px,280px)_1fr] lg:gap-16">
         <BookCover title={book.title} coverUrl={book.coverUrl} className="w-full max-w-[280px] shadow-md" />
         <div>

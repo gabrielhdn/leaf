@@ -88,7 +88,7 @@ export function MobileMenu({ canAddBook }: { canAddBook: boolean }) {
                 href={href}
                 aria-current={pathname === href || (href === "/" && pathname.startsWith("/books/")) ? "page" : undefined}
                 onClick={() => setOpen(false)}
-                className="rounded-lg border border-transparent px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted aria-[current=page]:border-border aria-[current=page]:bg-muted aria-[current=page]:text-brand"
+                className="rounded-lg border border-transparent px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted aria-[current=page]:border-border aria-[current=page]:bg-navigation-active aria-[current=page]:text-brand"
               >
                 {label}
               </Link>
@@ -97,7 +97,7 @@ export function MobileMenu({ canAddBook }: { canAddBook: boolean }) {
 
           <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-4">
             <div className="flex flex-wrap items-center gap-4">
-              {canAddBook && <Link href="/books/new" onClick={() => setOpen(false)} className="inline-flex items-center gap-1 text-sm font-medium text-brand hover:underline"><Plus className="size-4" aria-hidden="true" />{t("addBook")}</Link>}
+              {canAddBook && <Link href="/books/new" onClick={() => setOpen(false)} className="inline-flex items-center gap-1 text-sm font-medium text-brand transition-opacity duration-200 hover:opacity-80"><Plus className="size-4" aria-hidden="true" />{t("addBook")}</Link>}
               <Link href="/login" onClick={() => setOpen(false)} className="text-sm font-medium text-muted-foreground hover:text-foreground">{t("access")}</Link>
             </div>
             <div className="flex items-center gap-3">

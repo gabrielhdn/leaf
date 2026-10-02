@@ -47,7 +47,7 @@ export default async function LoginPage({
 
         <Link
           href="/"
-          className="mt-8 inline-block text-sm text-muted-foreground underline decoration-warm-accent underline-offset-4 transition-colors hover:text-foreground"
+          className="mt-8 inline-block text-sm text-muted-foreground transition-[color,opacity] duration-200 hover:opacity-80 hover:text-foreground"
         >
           {t("back")}
         </Link>

@@ -22,7 +22,7 @@ export async function HomeDashboard({ books }: { books: Book[] }) {
   ] as const;
 
   return (
-    <section aria-label={t("title")} className="mt-10">
+    <section aria-label={t("title")} className="mt-4 sm:mt-10">
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {stats.map(({ key, label, count, href, icon: Icon, iconClass }) => (
           <div key={key}>
@@ -41,17 +41,17 @@ export async function HomeDashboard({ books }: { books: Book[] }) {
         <section aria-labelledby="currently-reading-heading" className="min-w-0">
           <div className="mb-3 flex items-baseline justify-between gap-3">
             <h2 id="currently-reading-heading" className="font-heading text-2xl font-medium text-brand">{t("currentlyReading")}</h2>
-            <Link href="/reading" className="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-brand hover:underline">{t("seeAll")}<ArrowRight className="size-3" aria-hidden="true" /></Link>
+            <Link href="/reading" className="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-brand transition-opacity duration-200 hover:opacity-80">{t("seeAll")}<ArrowRight className="size-3" aria-hidden="true" /></Link>
           </div>
           {readingBook ? (
             <div className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-x-4 gap-y-4 rounded-xl border border-border bg-card p-4 sm:flex sm:min-h-72 sm:gap-5">
               <Link href={`/books/${readingBook.id}`} className="group w-full self-start sm:w-44 sm:shrink-0">
-                <BookCover title={readingBook.title} coverUrl={readingBook.coverUrl} className="w-full shadow-sm transition-transform group-hover:-translate-y-1" />
+                <BookCover title={readingBook.title} coverUrl={readingBook.coverUrl} className="w-full shadow-sm transition-opacity duration-200 group-hover:opacity-95" />
               </Link>
               <div className="contents sm:flex sm:min-w-0 sm:flex-1 sm:flex-col">
                 <div className="min-w-0 self-center sm:self-auto">
                   <span className="text-xs font-medium text-muted-foreground">{t("inProgress")}</span>
-                  <h3 className="mt-1 line-clamp-2 font-heading text-2xl font-medium leading-none text-brand sm:text-3xl"><Link href={`/books/${readingBook.id}`} className="hover:underline">{readingBook.title}</Link></h3>
+                  <h3 className="mt-1 line-clamp-2 font-heading text-2xl font-medium leading-none text-brand sm:text-3xl"><Link href={`/books/${readingBook.id}`} className="transition-opacity duration-200 hover:opacity-80">{readingBook.title}</Link></h3>
                   <p className="mt-1 line-clamp-1 text-xs text-muted-foreground">{readingBook.authors.map(({ author }) => author.name).join(", ")}</p>
                 </div>
                 {progress !== null && readingBook.currentPage !== null && readingBook.pageCount !== null ? (
@@ -80,13 +80,13 @@ export async function HomeDashboard({ books }: { books: Book[] }) {
         <section aria-labelledby="journey-heading" className="min-w-0">
           <div className="mb-3 flex items-baseline justify-between gap-3">
             <h2 id="journey-heading" className="font-heading text-2xl font-medium text-brand">{t("journey")}</h2>
-            <Link href="/great-work" className="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-brand hover:underline">{t("seeOverview")}<ArrowRight className="size-3" aria-hidden="true" /></Link>
+            <Link href="/great-work" className="inline-flex shrink-0 items-center gap-1 text-xs font-medium text-brand transition-opacity duration-200 hover:opacity-80">{t("seeOverview")}<ArrowRight className="size-3" aria-hidden="true" /></Link>
           </div>
           <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
             {greatWorkStages.map((stage) => {
               const count = books.filter((book) => getGreatWorkStage(book) === stage).length;
               return (
-                <Link key={stage} href={`/great-work#${stage.toLowerCase()}`} data-stage={stage} className="great-work-card group flex min-w-0 flex-col overflow-hidden rounded-xl border border-border/70 transition-transform hover:-translate-y-0.5">
+                <Link key={stage} href={`/great-work#${stage.toLowerCase()}`} data-stage={stage} className="great-work-card group flex min-w-0 flex-col overflow-hidden rounded-xl border border-border/70 transition-opacity duration-200 hover:opacity-95">
                   <div className="flex h-24 items-center justify-center bg-[var(--stage-background)]">
                     <Image src={`/great-work/${stage.toLowerCase()}.webp`} alt="" width={480} height={480} className="great-work-symbol size-20 object-contain" />
                   </div>

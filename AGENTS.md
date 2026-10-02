@@ -71,6 +71,7 @@ content unless explicitly requested.
 - Prefer reusable components over duplicated UI.
 - Keep the interface minimal, modern, warm, and comfortable.
 - Preserve responsive behavior on desktop and mobile.
+- Never use underlines on clickable elements. Prefer subtle color or opacity changes on hover and preserve visible keyboard focus.
 - Follow the typography, color palette, and theme tokens defined in the product specification.
 - Use existing design tokens instead of duplicating raw visual values.
 - Do not introduce new reusable colors, typography, spacing, radii, or shadows without a clear need.

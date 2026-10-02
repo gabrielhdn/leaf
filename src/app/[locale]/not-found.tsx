@@ -9,7 +9,7 @@ export default async function NotFound() {
       <div className="max-w-xl rounded-2xl border border-border bg-card p-7 sm:p-9">
         <h1 className="font-heading text-5xl text-brand">{t("notFoundTitle")}</h1>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">{t("notFoundDescription")}</p>
-        <Link href="/" className="mt-6 inline-block text-sm font-medium text-brand underline decoration-warm-accent underline-offset-4">{t("back")}</Link>
+        <Link href="/" className="mt-6 inline-block text-sm font-medium text-brand transition-opacity duration-200 hover:opacity-80">{t("back")}</Link>
       </div>
     </main>
   );

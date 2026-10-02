@@ -19,6 +19,7 @@
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
+  --color-navigation-active: var(--navigation-active);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
@@ -42,17 +43,18 @@
   color-scheme: light;
   --font-inter: "Inter Variable", sans-serif;
   --font-cormorant: "Cormorant Garamond Variable", serif;
-  --background: #f6f2e9;
+  --background: #f9f5ee;
   --foreground: #1e2922;
-  --card: #fbf8f1;
+  --card: #fcf9f3;
   --card-foreground: #1e2922;
-  --popover: #fbf8f1;
+  --popover: #fcf9f3;
   --popover-foreground: #1e2922;
   --primary: #344438;
   --primary-foreground: #fbf8f1;
-  --secondary: #ede3cf;
+  --secondary: #efe6d4;
   --secondary-foreground: #1e2922;
   --muted: #eae5da;
+  --navigation-active: #e8eadd;
   --muted-foreground: #53604f;
   --accent: #c7af82;
   --accent-foreground: #1e2922;
@@ -80,6 +82,7 @@
   --secondary: #222b23;
   --secondary-foreground: #eeeae1;
   --muted: #2a342a;
+  --navigation-active: var(--muted);
   --muted-foreground: #b6c0b3;
   --accent: #bca477;
   --accent-foreground: #0c1410;
@@ -104,6 +107,13 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+  }
+
+  a,
+  button,
+  summary {
+    text-decoration: none;
+    transition: color 200ms ease, background-color 200ms ease, border-color 200ms ease, opacity 200ms ease;
   }
 
   ::selection {
@@ -192,13 +202,7 @@ select {
 
 @media (max-width: 639px) {
   .home-hero-art {
-    background-position: 65% center;
-  }
-
-  .home-hero-fade {
-    background:
-      linear-gradient(to top, var(--background), transparent 65%),
-      linear-gradient(to right, color-mix(in srgb, var(--background) 96%, transparent), color-mix(in srgb, var(--background) 76%, transparent));
+    background-position: center;
   }
 }
 

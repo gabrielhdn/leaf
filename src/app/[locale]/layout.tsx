@@ -24,10 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("title"),
     description: t("description"),
     icons: {
-      icon: [
-        { url: "/brand/logo-light.png", media: "(prefers-color-scheme: light)" },
-        { url: "/brand/logo-dark.png", media: "(prefers-color-scheme: dark)" },
-      ],
+      icon: "/brand/logo-alt.png",
     },
   };
 }

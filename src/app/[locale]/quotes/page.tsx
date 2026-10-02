@@ -61,7 +61,7 @@ export default async function QuotesPage({
         <button type="submit" className="h-10 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/80">{t("apply")}</button>
       </form>}
 
-      {hasFilter && <Link href="/quotes" className="mt-4 inline-block text-sm text-brand underline decoration-warm-accent underline-offset-4">{t("clear")}</Link>}
+      {hasFilter && <Link href="/quotes" className="mt-4 inline-block text-sm text-brand transition-opacity duration-200 hover:opacity-80">{t("clear")}</Link>}
 
       {quotes.length ? <div className="mt-8 grid gap-5 md:grid-cols-2">
         {quotes.map((quote) => <article key={quote.id} className="grid grid-cols-[72px_minmax(0,1fr)] gap-4 rounded-xl border border-border bg-card p-4 sm:grid-cols-[94px_minmax(0,1fr)] sm:gap-6 sm:p-6">
@@ -73,7 +73,7 @@ export default async function QuotesPage({
               <time dateTime={quote.createdAt.toISOString()}>{dateFormat.format(quote.createdAt)}</time>
               {quote.isFavorite && <span className="inline-flex items-center gap-1 text-brand"><Star className="size-3 fill-current" aria-hidden="true" />{t("favorite")}</span>}
             </div>
-            <Link href={`/books/${quote.bookId}#quote-${quote.id}`} className="mt-4 block text-sm font-medium text-foreground hover:underline">{quote.book.title}</Link>
+            <Link href={`/books/${quote.bookId}#quote-${quote.id}`} className="mt-4 block text-sm font-medium text-foreground transition-opacity duration-200 hover:opacity-80">{quote.book.title}</Link>
             <p className="mt-1 text-xs text-muted-foreground">{quote.book.authors.map(({ author }) => author.name).join(", ")}</p>
             {owner && <form action={toggleQuoteFavorite} className="mt-5">
               <input type="hidden" name="id" value={quote.id} /><input type="hidden" name="bookId" value={quote.bookId} /><input type="hidden" name="locale" value={locale} />

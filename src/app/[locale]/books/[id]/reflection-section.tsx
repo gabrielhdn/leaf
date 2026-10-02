@@ -36,12 +36,12 @@ export async function ReflectionSection({ book, reflection, quotes, notes, owner
         <div>
           <h3 className="font-heading text-3xl text-brand">{t("favoriteQuotes")}</h3>
           {favoriteQuotes.length ? <ul className="mt-3 space-y-3">{favoriteQuotes.slice(0, 3).map((quote) => <li key={quote.id}><a href={`#quote-${quote.id}`} className="line-clamp-3 whitespace-pre-wrap text-sm leading-6 text-muted-foreground hover:text-foreground">{quote.content}</a></li>)}</ul> : <p className="mt-2 text-sm text-muted-foreground">{t("noFavoriteQuotes")}</p>}
-          {favoriteQuotes.length > 3 && <a href="#quotes" className="mt-3 inline-block text-sm text-brand underline decoration-warm-accent underline-offset-4">{t("seeAllQuotes")}</a>}
+          {favoriteQuotes.length > 3 && <a href="#quotes" className="mt-3 inline-block text-sm text-brand transition-opacity duration-200 hover:opacity-80">{t("seeAllQuotes")}</a>}
         </div>
         <div>
           <h3 className="font-heading text-3xl text-brand">{t("readingNotes")}</h3>
           {notes.length ? <ul className="mt-3 space-y-3">{notes.slice(0, 3).map((note) => <li key={note.id}><a href={`#note-${note.id}`} className="line-clamp-3 whitespace-pre-wrap text-sm leading-6 text-muted-foreground hover:text-foreground">{note.content}</a></li>)}</ul> : <p className="mt-2 text-sm text-muted-foreground">{t("noNotes")}</p>}
-          {notes.length > 3 && <a href="#notes" className="mt-3 inline-block text-sm text-brand underline decoration-warm-accent underline-offset-4">{t("seeAllNotes")}</a>}
+          {notes.length > 3 && <a href="#notes" className="mt-3 inline-block text-sm text-brand transition-opacity duration-200 hover:opacity-80">{t("seeAllNotes")}</a>}
         </div>
       </div>}
 
