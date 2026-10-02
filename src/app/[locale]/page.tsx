@@ -2,7 +2,7 @@ import { BookOpenText, Plus } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { BookCard } from "@/components/leaf/book-card";
 import { HomeDashboard } from "@/components/leaf/home-dashboard";
-import { Select } from "@/components/ui/select";
+import { LibraryFilters } from "@/components/leaf/library-filters";
 import { greatWorkStages } from "@/domain/reading-journey";
 import { Link } from "@/i18n/navigation";
 import { isOwner } from "@/lib/auth/owner-session";
@@ -20,7 +20,6 @@ function value(params: Record<string, string | string[] | undefined>, key: strin
 export default async function HomePage({ searchParams }: { searchParams: SearchParams }) {
   const t = await getTranslations("Home");
   const booksT = await getTranslations("Books");
-  const greatT = await getTranslations("GreatWork");
   const params = await searchParams;
   const search = value(params, "q").trim().slice(0, 100);
   const ownershipValue = value(params, "ownership");
@@ -77,30 +76,7 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
           {owner && databaseReady && <Link href="/books/new" className="inline-flex h-9 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/80"><Plus className="size-4" aria-hidden="true" />{booksT("add")}</Link>}
         </div>
 
-        {databaseReady && <form method="get" className="mt-8 grid gap-3 rounded-xl border border-border bg-card p-4 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_repeat(4,auto)]">
-          <label className="sr-only" htmlFor="book-search">{booksT("filters.search")}</label>
-          <input id="book-search" name="q" type="search" maxLength={100} defaultValue={search} placeholder={booksT("filters.search")} className="h-10 min-w-0 rounded-lg border border-input bg-field px-3 text-sm outline-none sm:col-span-2 lg:col-span-1" />
-          <label className="sr-only" htmlFor="ownership-filter">{booksT("filters.ownership")}</label>
-          <Select id="ownership-filter" name="ownership" defaultValue={filter.ownership ?? ""} containerClassName="min-w-44">
-            <option value="">{booksT("filters.allOwnership")}</option>
-            <option value="OWNED">{booksT("form.owned")}</option>
-            <option value="WISHLIST">{booksT("form.wishlist")}</option>
-          </Select>
-          <label className="sr-only" htmlFor="reading-filter">{booksT("filters.reading")}</label>
-          <Select id="reading-filter" name="reading" defaultValue={filter.reading ?? ""} containerClassName="min-w-44">
-            <option value="">{booksT("filters.allReading")}</option>
-            <option value="WANT_TO_READ">{booksT("form.wantToRead")}</option>
-            <option value="READING">{booksT("form.readingNow")}</option>
-            <option value="READ">{booksT("form.read")}</option>
-            <option value="ABANDONED">{booksT("form.abandoned")}</option>
-          </Select>
-          <label className="sr-only" htmlFor="stage-filter">{booksT("filters.stage")}</label>
-          <Select id="stage-filter" name="stage" defaultValue={filter.stage ?? ""} containerClassName="min-w-44">
-            <option value="">{booksT("filters.allStages")}</option>
-            {greatWorkStages.map((stage) => <option key={stage} value={stage}>{greatT(`stages.${stage}.name`)}</option>)}
-          </Select>
-          <button type="submit" className="h-10 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/80">{booksT("filters.apply")}</button>
-        </form>}
+        {databaseReady && <LibraryFilters search={search} filter={filter} />}
 
         {books.length ? <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-9 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {books.map((book) => <BookCard key={book.id} book={book} label={book.ownershipStatus === "WISHLIST" ? booksT("form.wishlist") : booksT(`form.${({ WANT_TO_READ: "wantToRead", READING: "readingNow", READ: "read", ABANDONED: "abandoned" } as const)[book.readingStatus]}`)} />)}

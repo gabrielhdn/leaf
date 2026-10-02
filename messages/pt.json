@@ -75,6 +75,8 @@
       "stage": "Etapa Great Work",
       "allStages": "Todas as etapas",
       "apply": "Filtrar",
+      "moreFilters": "Expandir filtros",
+      "fewerFilters": "Recolher filtros",
       "clear": "Limpar filtros"
     },
     "form": {

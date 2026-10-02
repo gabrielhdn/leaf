@@ -75,6 +75,8 @@
       "stage": "Great Work stage",
       "allStages": "All stages",
       "apply": "Filter",
+      "moreFilters": "Expand filters",
+      "fewerFilters": "Collapse filters",
       "clear": "Clear filters"
     },
     "form": {
